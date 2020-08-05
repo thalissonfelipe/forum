@@ -1,0 +1,9 @@
+.form .input-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form .input-group .input-container {
+    width: 48%;
+}

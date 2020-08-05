@@ -1,0 +1,141 @@
+/* Global Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+    font-size: 62.5%; /* 1rem = 10px */
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+
+    --primary: #FFA1DC;
+    --secondary: #FF53BF;
+    --header: #E1EBF2;
+    --grey: #777F85;
+    --white: #FAFAFA;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    background-color: var(--white);
+    box-shadow: 1px 0px 10px var(--primary);
+}
+
+.form-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+}
+
+.form {
+    width: 40%;
+    padding: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form form {
+    width: 100%;
+}
+
+.form img {
+    width: 14rem;
+    height: 14rem;
+    margin-bottom: 3rem;
+}
+
+.form h2 {
+    font-size: 3rem;
+    color: var(--grey);
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.form .input-container {
+    position: relative;
+    width: 100%;
+}
+
+.form .input-container input {
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 0.5rem 3rem;
+    margin: 1.5rem 0;
+    border: none;
+    border-bottom: 0.2rem solid var(--grey);
+    outline: none;
+    background-color: var(--white);
+}
+
+.form .input-container span {
+    position: absolute;
+    left: 2.83rem;
+    top: 1.4rem;
+    font-size: 1.6rem;
+    padding: 0.5rem 0;
+    pointer-events: none;
+    transition: 0.2s ease-in-out;
+    color: #777F85;
+}
+
+.form .input-container i {
+    position: absolute;
+    left: 0.1rem;
+    top: calc(50% - 1.4rem);
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.form .input-container input:focus ~ span,
+.form .input-container input:valid ~ span {
+    /* color: #e91e63; */
+    /* font-size: 1.4rem; */
+    opacity: 0;
+    /* transform: translate(-2.5rem, -2rem); */
+}
+
+.form .input-container input[type="submit"] {
+    /* width: 10rem; */
+    font-weight: bold;
+    background-color: var(--secondary);
+    color: var(--white);
+    cursor: pointer;
+    border: none;
+    padding: 1rem;
+}
+
+.form .input-container input[type="submit"]:hover {
+    opacity: 1;
+    background-color: var(--primary);
+}
+
+.form a {
+    text-decoration: none;
+    font-size: 1.6rem;
+    display: block;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    color: var(--grey);
+    width: auto;
+}
+
+.form a:hover,
+.form a:visited {
+    opacity: 1;
+    color: var(--grey);
+}
