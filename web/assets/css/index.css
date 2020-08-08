@@ -1,5 +1,4 @@
 .wrapper {
-    height: 100%;
     width: 100%;
     padding: 10rem;
     background-color: var(--primary);
@@ -56,8 +55,6 @@ header.menu nav ul li a.active {
 }
 
 .main-content {
-    flex: 1;
-    /* min-height: 90%; */
     height: auto;
     background-color: var(--white);
     display: grid;
@@ -131,7 +128,6 @@ header.menu nav ul li a.active {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* margin: 1rem; */
     padding: 2rem 0;
     max-height: 7rem;
     border: 1px solid var(--header);
