@@ -1,7 +1,7 @@
 .wrapper {
     width: 100%;
     padding: 10rem;
-    background-color: var(--primary);
+    background-image: linear-gradient(to right bottom,var(--primary),var(--secondary));
     display: flex;
     flex-direction: column;
 }
@@ -241,4 +241,59 @@ header.menu nav ul li a.active {
 
 .grid .row .right-side ul .author a:hover {
     color: var(--secondary);
+}
+
+.trending{
+    grid-column: 2/-1;
+    grid-row: 1/-1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+.trending-heading{
+    font-size: 3rem;
+    color: var(--primary);
+}
+.trending__item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1.2rem;
+    transition: all .2s;
+}
+.trending__item:hover{
+    transform: scale(1.1);
+}
+.trending__item a{
+    text-decoration: none;
+    font-size: 1.9rem;
+    color: var(--grey);
+    display: inline-block;
+    margin-bottom: 2px;
+}
+.trending__item a:hover{
+    color: var(--secondary);
+}
+.trending__item p{
+    color: var(--grey);
+    font-size: 1.3rem;
+}
+.trending__item .trending-info{
+    color: var(--grey);
+    font-size: 1.4rem;
+
+}
+.trending__item .trending-date{
+    color: var(--grey);
+    font-size: 1.3rem;
+}
+.trending__item p span{
+    color: var(--primary);
+    font-size: 1.4rem;
+}
+.trending__item hr{
+    width: 100%;
+    margin-top: 9px;
+    border-top: #ffa1dc 0.2px solid;
 }
