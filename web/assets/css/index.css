@@ -16,11 +16,16 @@ header.menu {
     border-top-right-radius: 1.8rem;
 }
 
-header.menu img {
+header.menu a {
+    height: 100%;
+}
+
+header.menu a img {
     height: 80%;
     flex-grow: 0;
     flex-shrink: 0;
     padding-left: 10rem;
+    padding-top: 1rem;
     cursor: pointer;
 }
 

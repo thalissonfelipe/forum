@@ -9,17 +9,24 @@
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../assets/css/profile.css">
+    <script src="../assets/js/main.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <header>
-            <img src="../assets/img/Uniquorum_hz_logo.png" alt="Logo site">
+        <header class="menu">
+            <a href="../index.html"><img src="../assets/img/Uniquorum_hz_logo.png" alt="Logo site" /></a>
             <nav>
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="#">Categorias</a></li>
                     <li><a href="#">Sobre</a></li>
                     <li><a class="active" href="#">Profile</a></li>
+                    <li> <!-- DARK MODE -->
+                        <label class="switch">
+                            <input type="checkbox" checked onClick="toggleTheme()">
+                            <span class="slider round"></span>
+                      </label>
+                    </li>
                 </ul>
             </nav>
         </header>
