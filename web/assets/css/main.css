@@ -14,12 +14,28 @@ html {
     height: 100%;
     width: 100%;
     min-height: 100vh;
+}
 
+.theme-light {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
     --header: #E1EBF2;
-    --grey: #777F85;
+    --grid-header: #FFA1DC;
+    --text: #777F85;
     --white: #FAFAFA;
+    --main: #FAFAFA;
+    --input: #FAFAFA;
+}
+
+.theme-dark {
+    --primary: #FFA1DC;
+    --secondary: #FF53BF;
+    --header: #1D2933;
+    --grid-header: none;
+    --text: #FAFAFA;
+    --white: #FAFAFA;
+    --main: #1A2630;
+    --input: #1A2630;
 }
 
 body {
@@ -28,7 +44,7 @@ body {
 }
 
 .card {
-    background-color: var(--white);
+    background-color: var(--main);
     box-shadow: 1px 0px 10px var(--primary);
 }
 
@@ -61,7 +77,7 @@ body {
 
 .form h2 {
     font-size: 3rem;
-    color: var(--grey);
+    color: var(--text);
     font-weight: bold;
     margin-bottom: 3rem;
 }
@@ -77,9 +93,10 @@ body {
     padding: 0.5rem 3rem;
     margin: 1.5rem 0;
     border: none;
-    border-bottom: 0.2rem solid var(--grey);
+    border-bottom: 0.2rem solid var(--text);
     outline: none;
-    background-color: var(--white);
+    background-color: var(--input);
+    color: var(--text);
 }
 
 .form .input-container span {
@@ -90,7 +107,7 @@ body {
     padding: 0.5rem 0;
     pointer-events: none;
     transition: 0.2s ease-in-out;
-    color: #777F85;
+    color: var(--text);
 }
 
 .form .input-container i {
@@ -103,14 +120,10 @@ body {
 
 .form .input-container input:focus ~ span,
 .form .input-container input:valid ~ span {
-    /* color: #e91e63; */
-    /* font-size: 1.4rem; */
     opacity: 0;
-    /* transform: translate(-2.5rem, -2rem); */
 }
 
 .form .input-container input[type="submit"] {
-    /* width: 10rem; */
     font-weight: bold;
     background-color: var(--secondary);
     color: var(--white);
@@ -130,12 +143,12 @@ body {
     display: block;
     margin-top: 0.5rem;
     opacity: 0.9;
-    color: var(--grey);
+    color: var(--text);
     width: auto;
 }
 
 .form a:hover,
 .form a:visited {
     opacity: 1;
-    color: var(--grey);
+    color: var(--text);
 }
