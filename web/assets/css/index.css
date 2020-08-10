@@ -4,7 +4,7 @@
     background-image: linear-gradient(to right bottom, var(--primary), var(--secondary));
     display: flex;
     flex-direction: column;
-}
+s}
 
 header.menu {
     height: 6rem;
@@ -367,6 +367,8 @@ input:checked + .slider:before {
 .grid-categories-page-fix { /*Helper class*/
     margin: 4rem !important;
     width: unset;
+    height: 100%;
+    padding-bottom: 15rem;
 }
 
 .grid.main-categories.grid-categories-page-fix {
@@ -378,7 +380,7 @@ input:checked + .slider:before {
 /*PÁGINA SOBRE*/
 .main-content-about {
     height: auto;
-    background-color: var(--white);
+    background-color: var(--main);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -401,7 +403,7 @@ input:checked + .slider:before {
     width: 50%;
     padding: 5rem;
     background-color: var(--primary);
-    color: var(--white);
+    color: var(--text);
     border-radius: 10px;
     font-size: 1.7rem;
 
@@ -421,6 +423,7 @@ input:checked + .slider:before {
 }
 .feature__text{
         font-size: 1.7rem;
+        color: var(--text);
 }
 .feature__icon{
         fill: var(--primary);
@@ -434,7 +437,6 @@ input:checked + .slider:before {
     font-weight: 400;
 }
 .heading-4--dark{
-    color: var(--grey);
+    color: var(--text);
 }
 /*PÁGINA SOBRE FIM*/
-}
