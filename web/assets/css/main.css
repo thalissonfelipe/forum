@@ -48,7 +48,7 @@ body {
 
 .card {
     background-color: var(--main);
-    box-shadow: 1px 0px 10px var(--primary);
+    box-shadow: 0rem 0.6rem 0.5rem 0.2rem rgba(82, 4, 53, 0.2);
 }
 
 .form-section {
@@ -67,7 +67,7 @@ body {
     flex-direction: column;
     border-radius: 1.8rem;
     align-items: center;
-    box-shadow: 0rem 0.6rem 0.5rem 0.2rem rgba(82, 4, 53, 0.2);
+    
 }
 
 .form form {
@@ -75,8 +75,8 @@ body {
 }
 
 .form img {
-    width: 14rem;
-    height: 14rem;
+    width: 16rem;
+    height: 16rem;
     margin-bottom: 3rem;
 }
 
