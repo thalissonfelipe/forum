@@ -57,7 +57,7 @@
     width: 100%;
     outline: none;
     padding: 1rem 4rem 1rem 2rem;
-    border: 1px solid var(--header);
+    border: 0.1rem solid var(--header);
     margin-left: 2rem;
     background-color: var(--input);
     border-radius: 4rem;
@@ -84,8 +84,7 @@
 .container .post {
     display: flex;
     flex-direction: column;
-    /* border: 1px solid var(--header); */
-    border: 1px solid var(--white);
+    border: 0.1rem solid var(--white);
     border-right: none;
     padding: 2rem 0rem 5rem 2rem;
     position: relative;
@@ -123,8 +122,7 @@
 .container .user-info {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--white);
-    /* border-left-color: var(--white); */
+    border: 0.1rem solid var(--white);
     padding: 2rem 0rem 5rem 2rem;
     width: 25%;
 }

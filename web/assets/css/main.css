@@ -47,7 +47,7 @@ body {
 
 .card {
     background-color: var(--main);
-    box-shadow: 1px 0px 10px var(--primary);
+    box-shadow: 0.1rem 0 1rem var(--primary);
 }
 
 .form-section {
