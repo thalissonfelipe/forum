@@ -1,4 +1,14 @@
 window.onload = function() {
+    const currentTheme = localStorage.getItem('theme');
+
+    if (!currentTheme) {
+        document.documentElement.className = 'light-theme';
+        localStorage.setItem('theme', 'light-theme');
+    } else {
+        document.documentElement.className = currentTheme;
+    }
+    
+
     const loginButton = document.querySelector('#login-button');
 
     loginButton.addEventListener('click', (event) => {

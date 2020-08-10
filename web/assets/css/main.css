@@ -16,7 +16,7 @@ html {
     min-height: 100vh;
 }
 
-.theme-light {
+.light-theme {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
     --header: #EDF3F7;
@@ -28,7 +28,7 @@ html {
     --paragraph: #1D2933;
 }
 
-.theme-dark {
+.dark-theme {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
     --header: #1D2933;
