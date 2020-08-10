@@ -129,6 +129,11 @@ input:focus::placeholder {
     color: var(--primary);
 }
 
+.form .input-container i.eye-icon {
+    left: calc(100% - 2rem);
+    cursor: pointer;
+}
+
 .form .input-container input[type="submit"] {
     font-weight: bold;
     background-color: var(--secondary);

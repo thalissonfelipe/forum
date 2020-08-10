@@ -3,25 +3,33 @@ document.onreadystatechange = function() {
     const profileItem = document.querySelector('#profile-item');
     const logoutItem = document.querySelector('#logout-item');
 
-    if (localStorage.getItem('profile') === 'aluno') {
-        profileItem.style.display = 'inline';
-        logoutItem.style.display = 'inline';
-        loginItem.style.display = 'none';
-    } else if (localStorage.getItem('profile') === 'admin') {
-        console.log('...');
-    } else {
-        loginItem.style.display = 'inline';
-        profileItem.style.display = 'none';
-        logoutItem.style.display = 'none';
+    if (loginItem && profileItem && logoutItem) {
+
+        if (localStorage.getItem('profile') === 'aluno') {
+            profileItem.style.display = 'inline';
+            logoutItem.style.display = 'inline';
+            loginItem.style.display = 'none';
+        } else if (localStorage.getItem('profile') === 'admin') {
+            console.log('...');
+        } else {
+            loginItem.style.display = 'inline';
+            profileItem.style.display = 'none';
+            logoutItem.style.display = 'none';
+        }
+    
     }
 };
 
 window.onload = function() {
     const logoutItem = document.querySelector('#logout-item');
 
-    logoutItem.addEventListener('click', function(event) {
-        localStorage.removeItem('profile');
-    });
+    if (logoutItem) {
+
+        logoutItem.addEventListener('click', function(event) {
+            localStorage.removeItem('profile');
+        });
+    
+    }
 }
 
 function setTheme(theme) {
@@ -44,3 +52,15 @@ function toggleTheme() {
        setTheme('theme-light');
    }
 })();
+
+function togglePassword(id) {
+    const icon = document.querySelector('#' + id);
+    const parent = icon.parentNode;
+    const password = parent.childNodes[1];
+
+    if (password.type === 'password') {
+        password.type = 'text';
+    } else {
+        password.type = 'password';
+    }    
+}

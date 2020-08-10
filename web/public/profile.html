@@ -38,9 +38,10 @@
             </nav>
         </header>
         <section class="profile">
-            <h1>Profile</h1>
             <div class="form">
+                <h1>Informações</h1>
                 <form>
+                    <div class="vertical-line"></div>
                     <div class="input-container">
                         <input type="text" name="name" id="name" value="Thalisson Felipe de Sousa Feitosa" required />
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -71,6 +72,24 @@
                     </div>
                     <div class="input-container">
                         <input type="submit" name="submit" id="update" value="Salvar alterações" />
+                    </div>
+                </form>
+            </div>
+            <div class="form">
+                <form>
+                    <h1>Trocar senha</h1>
+                    <div class="input-container">
+                        <input type="password" name="password" id="password" placeholder="Nova senha" required autocomplete="off" />
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                        <i id="eye-icon" class="fa fa-eye eye-icon" aria-hidden="true" onclick="togglePassword('eye-icon')"></i>
+                    </div>
+                    <div class="input-container">
+                        <input type="password" name="repeat-password" id="repeat-password" placeholder="Confirmar senha" required autocomplete="off" />
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                        <i id="eye-icon-repeat" class="fa fa-eye eye-icon" aria-hidden="true" onclick="togglePassword('eye-icon-repeat')"></i>
+                    </div>
+                    <div class="input-container">
+                        <input type="submit" name="submit" value="Atualizar senha" />
                     </div>
                 </form>
             </div>
