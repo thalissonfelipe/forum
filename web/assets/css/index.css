@@ -141,13 +141,18 @@ input:checked + .slider:before {
     width: 3.4rem;
     height: 3.4rem;
     font-size: 1.5rem;
-    color: white;
+    color: var(--white);
     background-color: var(--primary);
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5rem;
+    outline: none;
+    cursor: pointer;
+}
+.font-size-btn:hover{
+    opacity: 0.8;
 }
 #increase-font-btn{
-    margin-left: 5px;
+    margin-left: 0.5rem;
 }
 .main-content {
     height: auto;
