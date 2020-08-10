@@ -137,7 +137,18 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
+.font-size-btn{
+    width: 3.4rem;
+    height: 3.4rem;
+    font-size: 1.5rem;
+    color: white;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 5px;
+}
+#increase-font-btn{
+    margin-left: 5px;
+}
 .main-content {
     height: auto;
     background-color: var(--main);
