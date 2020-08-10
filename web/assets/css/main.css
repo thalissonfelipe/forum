@@ -20,7 +20,7 @@ html {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
     --header: #EDF3F7;
-    --grid-header: #FFA1DC;
+    --grid-header: #edf3f788;
     --text: #777F85;
     --white: #FAFAFA;
     --main: #FAFAFA;
@@ -32,7 +32,7 @@ html {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
     --header: #1D2933;
-    --grid-header: none;
+    --grid-header: #1D293388;
     --text: #777F85;
     --white: #FAFAFA;
     --main: #1A2630;
@@ -43,6 +43,7 @@ html {
 body {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 .card {
@@ -64,7 +65,9 @@ body {
     padding: 10rem;
     display: flex;
     flex-direction: column;
+    border-radius: 1.8rem;
     align-items: center;
+    box-shadow: 0rem 0.6rem 0.5rem 0.2rem rgba(82, 4, 53, 0.2);
 }
 
 .form form {
