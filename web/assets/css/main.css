@@ -25,6 +25,7 @@ html {
     --white: #FAFAFA;
     --main: #FAFAFA;
     --input: #FAFAFA;
+    --paragraph: #1D2933;
 }
 
 .theme-dark {
@@ -36,6 +37,7 @@ html {
     --white: #FAFAFA;
     --main: #1A2630;
     --input: #1A2630;
+    --paragraph: #FAFAFA;
 }
 
 body {
