@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <title>UNIQUORUM | Fórum para estudantes da Universidade Federal do Ceará</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/index.css">
-    <script src="assets/js/main.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <script src="../assets/js/main.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <header class="menu">
-            <a href="#"><img src="assets/img/Uniquorum_hz_logo.png" alt="Logo site" /></a>
+            <a href="#"><img src="../assets/img/Uniquorum_hz_logo.png" alt="Logo site" /></a>
             <nav>
                 <ul>
                     <li><a class="active" href="#">Home</a></li>
-                    <li><a href="public/categories.html">Categorias</a></li>
-                    <li><a href="public/about.html">Sobre</a></li>
-                    <li><a href="public/login.html">Login</a></li>
+                    <li><a href="categories.html">Categorias</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li id="login-item"><a href="login.html">Login</a></li>
+                    <li id="profile-item"><a href="profile.html">Profile</a></li>
+                    <li id="logout-item">
+                        <a href="index.html">
+                            Logout
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
                     <li> <!-- DARK MODE -->
                         <label class="switch">
                             <input type="checkbox" checked onClick="toggleTheme()">
@@ -176,7 +184,7 @@
                 <div class="row">
                     <div class="left-side">
                         <div class="icon"></div>
-                        <a href="public/post.html" class="title">Bem vindo ao Uniquroum</a>
+                        <a href="post.html" class="title">Bem vindo ao Uniquroum</a>
                     </div>
                     <div class="right-side">
                         <ul>

@@ -92,7 +92,7 @@ body {
 .form .input-container input {
     width: 100%;
     font-size: 1.6rem;
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 3rem 1rem;
     margin: 1.5rem 0;
     border: none;
     border-bottom: 0.2rem solid var(--text);
@@ -101,15 +101,24 @@ body {
     color: var(--text);
 }
 
-.form .input-container span {
-    position: absolute;
-    left: 2.83rem;
-    top: 1.4rem;
-    font-size: 1.6rem;
-    padding: 0.5rem 0;
-    pointer-events: none;
-    transition: 0.2s ease-in-out;
+::-webkit-input-placeholder {
     color: var(--text);
+}
+
+::-ms-input-placeholder {
+    color: var(--text);
+}
+
+::placeholder {
+    color: var(--text);
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+.form .input-container input:valid {
+    background-color: var(--input);
 }
 
 .form .input-container i {
@@ -118,11 +127,6 @@ body {
     top: calc(50% - 1.4rem);
     font-size: 2rem;
     color: var(--primary);
-}
-
-.form .input-container input:focus ~ span,
-.form .input-container input:valid ~ span {
-    opacity: 0;
 }
 
 .form .input-container input[type="submit"] {

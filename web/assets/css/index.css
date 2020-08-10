@@ -40,6 +40,23 @@ header.menu nav ul {
 
 header.menu nav ul li {
     padding: 0 3rem;
+    display: inline;
+    position: relative;
+}
+
+#logout-item,
+#profile-item,
+#login-item {
+    display: none;
+}
+
+header.menu nav ul li a i {
+    position: absolute;
+    font-size: 2rem;
+    color: var(--text);
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
 }
 
 header.menu nav ul li:last-child {
@@ -52,9 +69,11 @@ header.menu nav ul li a {
     color: var(--text);
 }
 
-header.menu nav ul li a:hover {
+header.menu nav ul li:hover a,
+header.menu nav ul li:hover a i {
     color: var(--primary);
 }
+
 header.menu nav ul li a.active {
     color: var(--secondary)
 }
@@ -342,7 +361,7 @@ input:checked + .slider:before {
     color: var(--secondary);
 }
 .trending__item p{
-    color: var(--grey);
+    color: var(--text);
     font-size: 1.3rem;
 }
 .trending__item .trending-info{
