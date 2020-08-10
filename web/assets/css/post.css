@@ -1,0 +1,150 @@
+.main-content {
+    background-color: var(--main);
+    display: flex;
+    flex-direction: column;
+    border-bottom-left-radius: 1.8rem;
+    border-bottom-right-radius: 1.8rem;
+    padding: 10rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+.header h1:hover {
+    text-decoration: underline;
+}
+
+.buttons {
+    margin-top: 3rem;
+    display: flex;
+}
+
+.buttons a {
+    text-decoration: none;
+    padding: 1rem 3.5rem 1rem 2rem;
+    background-color: var(--primary);
+    color: var(--white);
+    font-size: 1.6rem;
+    border-radius: .4rem;
+    position: relative;
+}
+
+.buttons a i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.buttons a:hover {
+    opacity: 0.8;
+}
+
+.buttons .search-container {
+    position: relative;
+    width: 20rem;
+}
+
+.buttons .search-container input {
+    width: 100%;
+    outline: none;
+    padding: 1rem 4rem 1rem 2rem;
+    border: 1px solid var(--header);
+    margin-left: 2rem;
+    background-color: var(--input);
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: var(--text);
+}
+
+.buttons .search-container i {
+    position: absolute;
+    right: 0rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.container {
+    display: flex;
+    margin-top: 3rem;
+    background-color: var(--header);
+    width: 100%s;
+}
+
+.container .post {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid var(--header); */
+    border: 1px solid var(--white);
+    border-right: none;
+    padding: 2rem 0rem 5rem 2rem;
+    position: relative;
+    width: 75%;
+}
+
+.container .post i {
+    font-size: 3rem;
+    color: var(--primary);
+    position: absolute;
+    right: 1.5rem;
+    top: 2.5rem;
+}
+
+.container .post h1 {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.container .post h1:hover {
+    text-decoration: underline;
+}
+
+.container .post span {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+    color: var(--text);
+}
+
+.container .post p {
+    font-size: 1.6rem;
+    color: var(--paragraph);
+}
+
+.container .user-info {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--white);
+    /* border-left-color: var(--white); */
+    padding: 2rem 0rem 5rem 2rem;
+    width: 25%;
+}
+
+.container .user-info #username {
+    font-size: 1.6rem;
+    color: var(--primary);
+}
+
+.container .user-info #posts,
+.container .user-info #joined {
+    font-size: 1.4rem;
+    color: var(--paragraph);
+}
+
+.container .user-info #posts {
+    padding: 1rem 0;
+}
+
+.container .user-info #posts span,
+.container .user-info #joined span {
+    color: var(--text);
+}
