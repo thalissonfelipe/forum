@@ -21,37 +21,41 @@ document.onreadystatechange = function() {
 };
 
 window.onload = function() {
+    const toggleSwitch = document.querySelector('input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.documentElement.className = currentTheme;
+    
+        if (currentTheme === 'dark-theme') {
+            toggleSwitch.checked = true;
+        }
+    } else {
+        document.documentElement.className = 'light-theme';
+        localStorage.setItem('theme', 'light-theme');
+    }
+
+    toggleSwitch.addEventListener('click', toggleTheme, false);
+
     const logoutItem = document.querySelector('#logout-item');
 
     if (logoutItem) {
-
         logoutItem.addEventListener('click', function(event) {
             localStorage.removeItem('profile');
         });
-    
     }
 }
 
-function setTheme(theme) {
-    localStorage.setItem('theme', theme);
-    document.documentElement.className = theme;
+function toggleTheme(e) {
+    if (e.target.checked) {
+        document.documentElement.className = 'dark-theme';
+        localStorage.setItem('theme', 'dark-theme');
+    }
+    else {
+        document.documentElement.className = 'light-theme';
+        localStorage.setItem('theme', 'light-theme');
+    }    
 }
-
-function toggleTheme() {
-   if (localStorage.getItem('theme') === 'theme-dark'){
-       setTheme('theme-light');
-   } else {
-       setTheme('theme-dark');
-   }
-}
-
-(function () {
-   if (localStorage.getItem('theme') === 'theme-dark') {
-       setTheme('theme-dark');
-   } else {
-       setTheme('theme-light');
-   }
-})();
 
 function togglePassword(id) {
     const icon = document.querySelector('#' + id);
