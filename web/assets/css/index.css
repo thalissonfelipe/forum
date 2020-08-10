@@ -4,7 +4,7 @@
     background-image: linear-gradient(to right bottom, var(--primary), var(--secondary));
     display: flex;
     flex-direction: column;
-s}
+}
 
 header.menu {
     height: 6rem;
@@ -392,6 +392,8 @@ input:checked + .slider:before {
     width: 100%;
     padding-top: 7rem;
     padding-bottom: 11rem;
+    border-bottom-left-radius: 1.8rem;
+    border-bottom-right-radius: 1.8rem;
 }
 .about-title{
     font-size: 4rem;
