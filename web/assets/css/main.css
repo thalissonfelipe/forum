@@ -19,7 +19,7 @@ html {
 .theme-light {
     --primary: #FFA1DC;
     --secondary: #FF53BF;
-    --header: #E1EBF2;
+    --header: #EDF3F7;
     --grid-header: #FFA1DC;
     --text: #777F85;
     --white: #FAFAFA;
@@ -33,7 +33,7 @@ html {
     --secondary: #FF53BF;
     --header: #1D2933;
     --grid-header: none;
-    --text: #FAFAFA;
+    --text: #777F85;
     --white: #FAFAFA;
     --main: #1A2630;
     --input: #1A2630;

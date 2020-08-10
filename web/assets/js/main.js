@@ -1,6 +1,7 @@
 document.onreadystatechange = function() {
     const loginItem = document.querySelector('#login-item');
     const profileItem = document.querySelector('#profile-item');
+    const managementItem = document.querySelector('#management-item');
     const logoutItem = document.querySelector('#logout-item');
 
     if (loginItem && profileItem && logoutItem) {
@@ -10,13 +11,16 @@ document.onreadystatechange = function() {
             logoutItem.style.display = 'inline';
             loginItem.style.display = 'none';
         } else if (localStorage.getItem('profile') === 'admin') {
-            console.log('...');
+            profileItem.style.display = 'inline';
+            managementItem.style.display = 'inline';
+            logoutItem.style.display = 'inline';
+            loginItem.style.display = 'none';
         } else {
             loginItem.style.display = 'inline';
             profileItem.style.display = 'none';
+            managementItem.style.display = 'none';
             logoutItem.style.display = 'none';
         }
-    
     }
 };
 

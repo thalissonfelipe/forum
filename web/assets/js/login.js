@@ -10,6 +10,9 @@ window.onload = function() {
             console.log('Preencha o campo usuário.');
         } else if (password === '') {
             console.log('Preencha o campo senha.');
+        } else if (username === 'admin') {
+            localStorage.setItem('profile', 'admin');
+            location.href = '../public/index.html';
         } else {
             localStorage.setItem('profile', 'aluno');
             location.href = '../public/index.html';

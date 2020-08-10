@@ -46,7 +46,8 @@ header.menu nav ul li {
 
 #logout-item,
 #profile-item,
-#login-item {
+#login-item,
+#management-item {
     display: none;
 }
 
@@ -156,13 +157,24 @@ input:checked + .slider:before {
 }
 .main-content {
     height: auto;
+    max-height: 70rem;
     background-color: var(--main);
     display: grid;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    overflow-y: scroll;
     grid-template-columns: 2.7fr 1fr;
     grid-template-rows: 1fr 1fr;
     border-bottom-left-radius: 1.8rem;
     border-bottom-right-radius: 1.8rem;
 }
+
+#cardscrollbar::-webkit-scrollbar
+{
+	width: 0px;
+	background-color: #F5F5F5;
+}
+
 
 .grid {
     display: flex;
@@ -244,7 +256,7 @@ input:checked + .slider:before {
     display: block;
     width: 5rem;
     height: 5rem;
-    background-color: red;
+    background-color: #FFCCEC;
     margin: 0 1rem;
 }
 
@@ -433,12 +445,12 @@ input:checked + .slider:before {
 }
 .about-title{
     font-size: 4rem;
-    color: var(--primary);
+    color: var(--secondary);
     font-weight: 300;
 }
 .about-subtitle{
     font-size: 1.8rem;
-    color: var(--secondary);
+    color: var(--primary);
     font-weight: 500;
 }
 .about-info-container{
