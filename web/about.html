@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <title>UNIQUORUM | Fórum para estudantes da Universidade Federal do Ceará</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+    <script src="../assets/js/main.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <header class="menu">
-            <img src="assets/img/Uniquorum_hz_logo.png" alt="Logo site">
+            <a href="index.html"><img src="../assets/img/Uniquorum_hz_logo.png" alt="Logo site" /></a>
             <nav>
                 <ul>
-                    <li><a class="active" href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="categories.html">Categorias</a></li>
-                    <li><a href="about.html">Sobre</a></li>
-                    <li><a href="public/login.html">Login</a></li>
+                    <li><a class="active" href="#">Sobre</a></li>
+                    <li id="login-item"><a href="login.html">Login</a></li>
+                    <li id="profile-item"><a href="profile.html">Profile</a></li>
+                    <li id="logout-item">
+                        <a href="index.html">
+                            Logout
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        </a>
+                    </li>
                     <li> <!-- DARK MODE -->
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" checked onClick="toggleTheme()">
                             <span class="slider round"></span>
                       </label>
+                    </li>
+                    <li>
+                        <button class = "font-size-btn" id = "decrease-font-btn">a</button>
+                        <button class = "font-size-btn" id = "increase-font-btn">A</button>
                     </li>
                 </ul>
             </nav>
@@ -33,7 +46,7 @@
             <div class="features">
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-global"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-global"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">Network com alunos da sua Universidade</h4>
                     <p class="feature__text">
@@ -42,7 +55,7 @@
                 </div>
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-trophy"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-trophy"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">Exclusivos para estudantes</h4>
                     <p class="feature__text">
@@ -51,7 +64,7 @@
                 </div>
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-map-pin"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-map-pin"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">Descubra estudantes perto de você</h4>
                     <p class="feature__text">
@@ -60,7 +73,7 @@
                 </div>
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-key"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-key"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">A chave para novas oportunidades</h4>
                     <p class="feature__text">
@@ -69,7 +82,7 @@
                 </div>
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-presentation"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-presentation"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">Melhore suas notas</h4>
                     <p class="feature__text">
@@ -78,7 +91,7 @@
                 </div>
                 <div class="feature">
                     <svg class="feature__icon">
-                        <use xlink:href="assets/img/sprite.svg#icon-lock"></use>
+                        <use xlink:href="../assets/img/sprite.svg#icon-lock"></use>
                     </svg>
                     <h4 class="heading-4 heading-4--dark">Seus dados seguros</h4>
                     <p class="feature__text">
