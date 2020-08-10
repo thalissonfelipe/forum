@@ -45,7 +45,7 @@
             <div class="header">
                 <h1>Bem vindo ao Uniquorum</h1>
                 <div class="buttons">
-                    <a href="#">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>
+                    <a id="reply-top" href="#reply-container">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>
                     <div class="search-container">
                         <input type="text" placeholder="Procure aqui">
                         <i class="fa fa-search" aria-hidden="true"></i>
@@ -114,8 +114,18 @@
                 </div>
             </div>
 
-            <div class="buttons">
-                <a href="#">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>
+            <div id="reply-container" class="reply-container">
+                <div class="icons">
+                    <i class="fa fa-bold" aria-hidden="true"></i>
+                    <i class="fa fa-italic" aria-hidden="true"></i>
+                    <i class="fa fa-underline" aria-hidden="true"></i>
+                    <i class="fa fa-font" aria-hidden="true"></i>
+                    <i class="fa fa-eraser" aria-hidden="true"></i>
+                </div>
+                <textarea name="reply-answer" id="reply-answer" placeholder="Deixe sua mensagem aqui"></textarea>
+                <div class="buttons">
+                    <a id="reply-button">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>
+                </div>
             </div>
         </section>
     </div>

@@ -21,6 +21,7 @@ document.onreadystatechange = function() {
 };
 
 window.onload = function() {
+    // theme
     const toggleSwitch = document.querySelector('input[type="checkbox"]');
     const currentTheme = localStorage.getItem('theme');
 
@@ -37,6 +38,7 @@ window.onload = function() {
 
     toggleSwitch.addEventListener('click', toggleTheme, false);
 
+    // logout
     const logoutItem = document.querySelector('#logout-item');
 
     if (logoutItem) {
@@ -44,6 +46,11 @@ window.onload = function() {
             localStorage.removeItem('profile');
         });
     }
+
+    // reply
+    const button = document.querySelector('#reply-top');
+
+    button.addEventListener('click', replyPost);
 }
 
 function toggleTheme(e) {
@@ -67,4 +74,16 @@ function togglePassword(id) {
     } else {
         password.type = 'password';
     }    
+}
+
+function replyPost() {
+    const replyContainer = document.querySelector('.reply-container');
+    replyContainer.style.display = 'block';
+
+    const replyButton = document.querySelector('#reply-button');
+
+    replyButton.addEventListener('click', () => {
+        alert('OK');
+        replyContainer.style.display = 'none';
+    });
 }
