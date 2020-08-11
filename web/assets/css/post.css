@@ -127,23 +127,23 @@
     width: 25%;
 }
 
-.container .user-info #username {
+.container .user-info span {
     font-size: 1.6rem;
     color: var(--primary);
 }
 
-.container .user-info #posts,
-.container .user-info #joined {
+.container .user-info .posts,
+.container .user-info .joined {
     font-size: 1.4rem;
     color: var(--paragraph);
 }
 
-.container .user-info #posts {
+.container .user-info .posts {
     padding: 1rem 0;
 }
 
-.container .user-info #posts span,
-.container .user-info #joined span {
+.container .user-info .posts span,
+.container .user-info .joined span {
     color: var(--text);
 }
 

@@ -69,7 +69,10 @@ body {
     flex-direction: column;
     border-radius: 1.8rem;
     align-items: center;
-    
+}
+
+.form h1 {
+    display: none;
 }
 
 .form form {
