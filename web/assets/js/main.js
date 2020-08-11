@@ -52,9 +52,22 @@ window.onload = function() {
     }
 
     // reply
-    const button = document.querySelector('#reply-top');
+    const replyButton = document.querySelector('#reply-top');
 
-    button.addEventListener('click', replyPost);
+    if (replyButton) {
+        replyButton.addEventListener('click', replyPost);
+        if (!localStorage.getItem('profile')) {
+            replyButton.href = 'login.html';
+        }
+    }
+
+    const addTopic = document.querySelector('.new-topic-container');
+
+    if (addTopic) {
+        if (!localStorage.getItem('profile')) {
+            replyButton.href = 'login.html';
+        }
+    }
 }
 
 function toggleTheme(e) {
