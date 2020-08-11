@@ -5,7 +5,6 @@ document.onreadystatechange = function() {
     const logoutItem = document.querySelector('#logout-item');
 
     if (loginItem && profileItem && logoutItem) {
-
         if (localStorage.getItem('profile') === 'aluno') {
             profileItem.style.display = 'inline';
             logoutItem.style.display = 'inline';
@@ -33,14 +32,14 @@ window.onload = function() {
         document.documentElement.className = currentTheme;
     
         if (currentTheme === 'dark-theme') {
-            toggleSwitch.checked = true;
+            toggleSwitch && (toggleSwitch.checked = true);
         }
     } else {
         document.documentElement.className = 'light-theme';
         localStorage.setItem('theme', 'light-theme');
     }
 
-    toggleSwitch.addEventListener('click', toggleTheme, false);
+    toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));
 
     // logout
     const logoutItem = document.querySelector('#logout-item');
@@ -55,10 +54,11 @@ window.onload = function() {
     const replyButton = document.querySelector('#reply-top');
 
     if (replyButton) {
-        replyButton.addEventListener('click', replyPost);
         if (!localStorage.getItem('profile')) {
             replyButton.href = 'login.html';
+            return;
         }
+        replyButton.addEventListener('click', replyPost);
     }
 
     const addTopic = document.querySelector('.new-topic-container');
@@ -66,6 +66,7 @@ window.onload = function() {
     if (addTopic) {
         if (!localStorage.getItem('profile')) {
             replyButton.href = 'login.html';
+            return;
         }
     }
 }

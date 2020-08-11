@@ -7,7 +7,6 @@ window.onload = function() {
     } else {
         document.documentElement.className = currentTheme;
     }
-    
 
     const loginButton = document.querySelector('#login-button');
 

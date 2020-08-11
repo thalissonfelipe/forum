@@ -80,6 +80,7 @@
     margin-top: 3rem;
     background-color: var(--header);
     width: 100%;
+    border-radius: 2rem;
 }
 
 .container .post {
@@ -185,9 +186,10 @@
     font-size: 2rem;
     height: 15rem;
     resize: none;
-    background-color: var(--header);
+    background-color: var(--reply);
     border: none;
     color: var(--text);
+    border-radius: 1rem;
 }
 
 .reply-container #reply-button {
@@ -204,8 +206,10 @@
     padding: 1rem 3rem;
     font-size: 2rem;
     resize: none;
-    background-color: var(--header);
+    background-color: var(--reply);
     border: none;
     color: var(--text);
     margin-bottom: 0.2rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
 }
