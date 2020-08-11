@@ -26,6 +26,7 @@ html {
     --main: #FAFAFA;
     --input: #FAFAFA;
     --paragraph: #1D2933;
+    --reply: #CADBE6;
 }
 
 .dark-theme {
@@ -38,6 +39,7 @@ html {
     --main: #1A2630;
     --input: #1A2630;
     --paragraph: #FAFAFA;
+    --reply: #344654;
 }
 
 body {
@@ -165,4 +167,46 @@ input:focus::placeholder {
 .form a:visited {
     opacity: 1;
     color: var(--text);
+}
+
+.path {
+    display: flex;
+    position: relative;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.path.category {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    justify-content: flex-start;
+    margin-left: 1rem;
+}
+
+.path i {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: var(--text);
+}
+
+.path .links {
+    padding-top: 0.1rem;
+}
+
+.path .links a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 1.5rem;
+}
+
+.path .links a:hover {
+    text-decoration: underline;
+}
+
+.path .links span {
+    color: var(--text);
+    font-size: 1.5rem;
+    opacity: 0.8;
+    padding: 0 0.5rem;
 }
