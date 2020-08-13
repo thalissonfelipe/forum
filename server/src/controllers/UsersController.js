@@ -3,7 +3,13 @@ const User = require('../models/User');
 class UsersController {
     async index (request, response) {
         try {
-            const users = await User.find({});
+            const user = await User.findById(request.userid);
+
+            if (user && user.profile !== 'admin') {
+                return response.status(403).send('Not allowed');
+            }
+
+            const users = await User.find({}, { password: 0 });
 
             response.status(200).send(users);
         } catch (error) {
@@ -14,26 +20,13 @@ class UsersController {
     async show (request, response) {
         try {
             const { registry } = request.params;
-            const user = await User.findOne({ registry });
+            const user = await User.findOne({ registry }, { password: 0 });
 
             if (user) {
                 response.status(200).send(user);
             } else {
                 response.status(404).send('User not found');
             }
-        } catch (error) {
-            response.status(500).send(error.message);
-        }
-    }
-
-    async create (request, response) {
-        try {
-            const body = request.body;
-            const user = new User(body);
-
-            await user.save();
-
-            response.status(200).send('OK');
         } catch (error) {
             response.status(500).send(error.message);
         }
@@ -64,9 +57,12 @@ class UsersController {
             const user = await User.findOne({ registry });
 
             if (user) {
-                await User.findOneAndDelete({ registry });
-
-                response.status(200).send('OK');
+                if (user.profile === 'admin') {
+                    await User.findOneAndDelete({ registry });
+                    response.status(200).send('OK');
+                } else {
+                    response.status(403).send('Not allowed');
+                }
             } else {
                 response.status(404).send('User not found');
             }
