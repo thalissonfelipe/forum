@@ -4,24 +4,24 @@ const APIFeatures = require('../utils/apiFeatures');
 class CommentsController {
 
     async createComment (request, response) {
-        try{
-            const comment = await Comment.findByIdAndUpdate(request.params.id,request.body,{
-                new: true,
-                runValidators: true
-            });
-            response.status(200).json({
-                status : "Success",
-                data: {
-                    comment : comment
-                }
-            });
-        }
-        catch (err){
-            response.status(404).json({
-                status: "Fail",
-                message: err
-            });
-        }
+            try{
+                const newComment = await Comment.create(request.body);
+        
+                response.status(201).json({
+        
+                    status: "Success",
+                    data:{
+                        comment:newComment
+                    }
+                });
+            }
+            catch(err){
+                response.status(400).json({
+                    status: "Fail",
+                    message: err
+                });
+            }
+        
     }
     async updateComment (request, response) {
         try{
