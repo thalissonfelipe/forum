@@ -24,6 +24,7 @@ routes.route('/posts')
     .get(postsController.showAllPosts)
     .post(postsController.createPost);
 routes.route('/posts/:id')
+    .get(postsController.getPost)
     .patch(postsController.updatePost)
     .delete(postsController.deletePost);
 
