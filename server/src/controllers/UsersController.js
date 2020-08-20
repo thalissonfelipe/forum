@@ -6,14 +6,14 @@ class UsersController {
             const user = await User.findById(request.userid);
 
             if (user && user.profile !== 'admin') {
-                return response.status(403).send('Not allowed');
+                return response.status(403).json({ message: 'Not allowed' });
             }
 
             const users = await User.find({}, { password: 0 });
 
             response.status(200).send(users);
         } catch (error) {
-            response.status(500).send(error.message);
+            response.status(500).json({ message: error.message });
         }
     }
 
@@ -25,10 +25,10 @@ class UsersController {
             if (user) {
                 response.status(200).send(user);
             } else {
-                response.status(404).send('User not found');
+                response.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            response.status(500).send(error.message);
+            response.status(500).json({ message: error.message });
         }
     }
 
@@ -42,12 +42,12 @@ class UsersController {
 
                 await User.findOneAndUpdate({ registry }, { $set: body });
 
-                response.status(200).send('OK');
+                response.status(200).json({ message: 'OK' });
             } else {
-                response.status(404).send('User not found');
+                response.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            response.status(500).send(error.message);
+            response.status(500).json({ message: error.message });
         }
     }
 
@@ -59,15 +59,15 @@ class UsersController {
             if (user) {
                 if (user.profile === 'admin') {
                     await User.findOneAndDelete({ registry });
-                    response.status(200).send('OK');
+                    response.status(200).json({ message: 'OK' });
                 } else {
-                    response.status(403).send('Not allowed');
+                    response.status(403).json({ message: 'Not allowed' });
                 }
             } else {
-                response.status(404).send('User not found');
+                response.status(404).json({ message: 'User not found' });
             }
         } catch (error) {
-            response.status(500).send(error.message);
+            response.status(500).json({ message: error.message });
         }
     }
 }

@@ -5,7 +5,7 @@ document.onreadystatechange = function() {
     const logoutItem = document.querySelector('#logout-item');
 
     if (loginItem && profileItem && logoutItem) {
-        if (localStorage.getItem('profile') === 'aluno') {
+        if (localStorage.getItem('profile') === 'common') {
             profileItem.style.display = 'inline';
             logoutItem.style.display = 'inline';
             loginItem.style.display = 'none';
@@ -41,21 +41,12 @@ window.onload = function() {
 
     toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));
 
-    // logout
-    const logoutItem = document.querySelector('#logout-item');
-
-    if (logoutItem) {
-        logoutItem.addEventListener('click', function(event) {
-            localStorage.removeItem('profile');
-        });
-    }
-
     // reply
     const replyButton = document.querySelector('#reply-top');
 
     if (replyButton) {
         if (!localStorage.getItem('profile')) {
-            replyButton.href = 'login.html';
+            replyButton.href = '/web/public/login.html';
             return;
         }
         replyButton.addEventListener('click', replyPost);
@@ -65,10 +56,12 @@ window.onload = function() {
 
     if (addTopic) {
         if (!localStorage.getItem('profile')) {
-            replyButton.href = 'login.html';
+            replyButton.href = '/web/public/login.html';
             return;
         }
     }
+
+    handleLogout();
 }
 
 function toggleTheme(e) {
@@ -104,4 +97,36 @@ function replyPost() {
         alert('OK');
         replyContainer.style.display = 'none';
     });
+}
+
+function handleLogout() {
+    const logout = document.querySelector('#logout-item');
+
+    if (logout) {
+        logout.addEventListener('click', function() {
+            localStorage.removeItem('profile');
+        });
+    }
+}
+
+
+function showWarningMessage(id, message, changeInputColor) {
+    // TODO: mudar cor do texto e da borda
+    const div = document.querySelector('#' + id);
+    const span = div.children[1];
+    const input = div.previousElementSibling.children[0];
+
+    div.style.visibility = 'visible';
+    span.innerHTML = message;
+    changeInputColor && (input.style.borderBottomColor = 'red');
+}
+
+function hideWarningMessage(id) {
+    const div = document.querySelector('#' + id);
+    const span = div.children[1];
+    const input = div.previousElementSibling.children[0];
+
+    div.style.visibility = 'hidden';
+    span.innerHTML = '';
+    input.style.borderBottomColor = 'var(--text)';
 }

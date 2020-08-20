@@ -1,4 +1,9 @@
 window.onload = function() {
+    setDefaultTheme();
+    handleLogin();
+}
+
+function setDefaultTheme() {
     const currentTheme = localStorage.getItem('theme');
 
     if (!currentTheme) {
@@ -7,24 +12,52 @@ window.onload = function() {
     } else {
         document.documentElement.className = currentTheme;
     }
+}
 
-    const loginButton = document.querySelector('#login-button');
+function handleLogin() {
+    const button = document.querySelector('#login-button');
 
-    loginButton.addEventListener('click', (event) => {
+    button.addEventListener('click', (event) => {
         event.preventDefault();
+
+        hideWarningMessage('div-username');
+        hideWarningMessage('div-password');
+
         const username = document.querySelector('#login-username').value;
         const password = document.querySelector('#login-password').value;
 
         if (username === '') {
-            console.log('Preencha o campo usuário.');
+            showWarningMessage('div-username', 'Usuário inválido.', true);
         } else if (password === '') {
-            console.log('Preencha o campo senha.');
-        } else if (username === 'admin') {
-            localStorage.setItem('profile', 'admin');
-            location.href = '../public/index.html';
+            showWarningMessage('div-password', 'Senha inválida.', true);
         } else {
-            localStorage.setItem('profile', 'aluno');
-            location.href = '../public/index.html';
+            let statusCode;
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            };
+
+            fetch('/users/login', options)
+                .then((response) => {
+                    statusCode = response.status;
+                    return response.json();
+                })
+                .then((responseJSON) => {
+                    if (statusCode === 200) {
+                        console.log(responseJSON)
+                        localStorage.setItem('profile', responseJSON.profile);
+                        localStorage.setItem('registry', responseJSON.registry);
+                        location.href = '/web/public/index.html';
+                    } else if (statusCode === 401) {
+                        showWarningMessage('div-password', 'Usuário ou senha inválidos.', false);
+                    } else {
+                        showWarningMessage('div-password', 'Erro no servidor. Tente novamente mais tarde.', false);
+                    }
+                });
         }
     });
 }

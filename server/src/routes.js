@@ -3,11 +3,13 @@ const routes = express.Router();
 const UsersController = require('./controllers/UsersController');
 const AuthController = require('./controllers/AuthController');
 const PostsController = require('./controllers/PostsController');
+const CategoriesController = require('./controllers/CategoriesController');
 const middlewares = require('./controllers/middlewares');
 
 const usersController = new UsersController();
 const authController = new AuthController();
 const postsController = new PostsController();
+const categoriesController = new CategoriesController();
 
 // User routes
 routes.get('/users', middlewares, usersController.index);
@@ -18,15 +20,16 @@ routes.post('/users/logout', authController.logout);
 routes.put('/users/:registry', usersController.update);
 routes.delete('/users/:registry', middlewares, usersController.destroy);
 
-//Post routes
+// Post routes
+routes.get('/posts', postsController.showAllPosts);
+routes.get('/posts/:id', postsController.getPost);
+routes.post('/posts', middlewares, postsController.createPost);
+routes.put('/posts/:id', middlewares, postsController.updatePost);
+routes.delete('/posts/:id', middlewares, postsController.deletePost);
 
-routes.route('/posts')
-    .get(postsController.showAllPosts)
-    .post(postsController.createPost);
-routes.route('/posts/:id')
-    .get(postsController.getPost)
-    .patch(postsController.updatePost)
-    .delete(postsController.deletePost);
+// Category routes
+routes.get('/categories', categoriesController.index);
+routes.get('/categories/:title', categoriesController.show);
+routes.post('/categories', categoriesController.create);
 
 module.exports = routes;
-

@@ -4,34 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | UNIQUORUM</title>
-    <link rel="icon" type="image/png" href="../assets/img/Uniquorum_icon.png" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/login.js"></script>
+    <link rel="icon" type="image/png" href="/web/assets/img/Uniquorum_icon.png" />
+    <link rel="stylesheet" href="/web/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/web/assets/css/main.css" />
 </head>
 <body>
     <section class="form-section" >
         <div class="form card">
             <h1>Login</h1>
-            <img src="../assets/img/Uniquorum_vt_logo.png" alt="Logo" />
+            <img src="/web/assets/img/Uniquorum_vt_logo.png" alt="Logo" />
             <form>
                 <div class="input-container">
-                    <input type="text" name="username" id="login-username" placeholder="Usuário" autocomplete="off" />
+                    <input type="text" name="username" id="login-username" oninput="hideWarningMessage('div-username')" placeholder="Usuário" autocomplete="off" />
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </div>
+                <div id="div-username" class="div-message-error">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span></span>
+                </div>
                 <div class="input-container">
-                    <input type="password" name="password" id="login-password" placeholder="Senha" autocomplete="off" />
+                    <input type="password" name="password" id="login-password" oninput="hideWarningMessage('div-password')" placeholder="Senha" autocomplete="off" />
                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                </div>
+                <div id="div-password" class="div-message-error">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span></span>
                 </div>
                 <div class="input-container">
                     <input id="login-button" type="submit" name="submit" value="Login" />
                 </div>
             </form>
-            <a href="forget_password.html" id="forget-password">Esqueceu a senha?</a>
-            <a href="register.html" id="register">Cadastre-se.</a>
-            <a href="index.html" id="home">Página Inicial.</a>
+            <a href="/web/public/forget_password.html" id="forget-password">Esqueceu a senha?</a>
+            <a href="/web/public/register.html" id="register">Cadastre-se.</a>
+            <a href="/web/public/index.html" id="home">Página Inicial.</a>
         </div>
     </section>
+    <script src="/web/assets/js/main.js"></script>
+    <script src="/web/assets/js/login.js"></script>
 </body>
 </html>

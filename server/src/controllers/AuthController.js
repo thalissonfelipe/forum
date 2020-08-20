@@ -11,11 +11,11 @@ class AuthController {
             const user = await User.findOne({ username });
 
             if (!user) {
-                return response.status(401).json('Invalid username');
+                return response.status(401).json({ message: 'Invalid username' });
             }
 
             if (!await bcrypt.compare(password, user.password)) {
-                return response.status(401).json('Invalid password');
+                return response.status(401).json({ message: 'Invalid password' });
             }
 
             const token = jwt.sign({ id: user._id }, config.getJwtSecret(), {
@@ -23,9 +23,9 @@ class AuthController {
             });
 
             response.cookie('jwt', token, { httpOnly: true });
-            return response.json({ token });
+            return response.status(200).json({ token, profile: user.profile, registry: user.registry });
         } catch (error) {
-            return response.json(error.message);
+            return response.status(500).json({ message: error.message });
         }
     }
 
@@ -35,16 +35,16 @@ class AuthController {
             let user = await User.findOne({ username: body.username });
 
             if (user) {
-                response.status(409).send('Username already exists');
+                response.status(409).json({ message: 'Username already exists' });
             } else {
                 body.password = bcrypt.hashSync(body.password, 10);
                 user = new User(body);
                 await user.save();
 
-                response.status(200).send('OK');
+                response.status(200).json({ message: 'OK' });
             }
         } catch (error) {
-            response.status(500).send(error.message);
+            response.status(500).json({ message: error.message });
         }
     }
 

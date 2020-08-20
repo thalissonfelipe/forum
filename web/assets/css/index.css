@@ -15,6 +15,7 @@ header.menu {
     align-items: center;
     border-top-left-radius: 1.8rem;
     border-top-right-radius: 1.8rem;
+    min-width: 100rem;
 }
 
 header.menu a {
@@ -77,6 +78,10 @@ header.menu nav ul li:hover a i {
 
 header.menu nav ul li a.active {
     color: var(--secondary)
+}
+
+header.menu nav ul li:last-child {
+    display: flex;
 }
 
 /*Botão dark mode*/
@@ -264,6 +269,7 @@ input:checked + .slider:before {
     border-radius: 50%;
     background-color: #FFCCEC;
     margin: 0 2rem 0 1rem;
+    flex-shrink: 0;
 }
 
 .grid .row .left-side .info {

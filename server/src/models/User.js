@@ -45,8 +45,11 @@ const UserSchema = new mongoose.Schema({
     semester: {
         type: Number,
         required: [true, 'Missing semester field']
+    },
+    posts: {
+        type: Number,
+        required: [true, 'Missing posts field']
     }
-
 });
 
 module.exports = mongoose.model('User', UserSchema);

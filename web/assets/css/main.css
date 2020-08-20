@@ -101,7 +101,7 @@ body {
     width: 100%;
     font-size: 1.6rem;
     padding: 0.5rem 3rem 1rem;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
     border: none;
     border-bottom: 0.2rem solid var(--text);
     outline: none;
@@ -212,4 +212,19 @@ input:focus::placeholder {
     font-size: 1.5rem;
     opacity: 0.8;
     padding: 0 0.5rem;
+}
+
+.div-message-error {
+    display: 'inline-flex';
+    visibility: hidden;
+}
+
+.div-message-error i {
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+    color: red;
+}
+
+.div-message-error span {
+    font-size: 1.3rem;
 }
