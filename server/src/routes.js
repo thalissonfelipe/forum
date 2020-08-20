@@ -12,7 +12,7 @@ const postsController = new PostsController();
 const categoriesController = new CategoriesController();
 
 // User routes
-routes.get('/users', middlewares, usersController.index);
+routes.get( '/users', middlewares, usersController.index);
 routes.get('/users/:registry', middlewares, usersController.show);
 routes.post('/users', middlewares, authController.create);
 routes.post('/users/login', authController.authenticate);
