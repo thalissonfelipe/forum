@@ -14,7 +14,7 @@
 }
 
 .header h1 {
-    font-size: 3rem;
+    font-size: calc(3rem * var(--font-size));
     color: var(--primary);
 }
 
@@ -32,7 +32,7 @@
     padding: 1rem 3.5rem 1rem 2rem;
     background-color: var(--primary);
     color: var(--white);
-    font-size: 1.6rem;
+    font-size: calc(1.6rem * var(--font-size));
     border-radius: .4rem;
     position: relative;
     cursor: pointer;
@@ -62,7 +62,7 @@
     margin-left: 2rem;
     background-color: var(--input);
     border-radius: 4rem;
-    font-size: 1.6rem;
+    font-size: calc(1.6rem * var(--font-size));
     color: var(--text);
 }
 
@@ -71,7 +71,7 @@
     right: 0rem;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.5rem;
+    font-size: calc(1.5rem * var(--font-size));
     color: var(--primary);
 }
 
@@ -93,7 +93,7 @@
 }
 
 .container .post i {
-    font-size: 3rem;
+    font-size: calc(3rem * var(--font-size));
     color: var(--primary);
     position: absolute;
     right: 1.5rem;
@@ -101,7 +101,7 @@
 }
 
 .container .post h1 {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     color: var(--primary);
 }
 
@@ -110,13 +110,13 @@
 }
 
 .container .post span {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--font-size));
     padding: 1rem 0;
     color: var(--text);
 }
 
 .container .post p {
-    font-size: 1.6rem;
+    font-size: calc(1.6rem * var(--font-size));
     color: var(--paragraph);
 }
 
@@ -128,13 +128,13 @@
 }
 
 .container .user-info span {
-    font-size: 1.6rem;
+    font-size: calc(1.6rem * var(--font-size));
     color: var(--primary);
 }
 
 .container .user-info .posts,
 .container .user-info .joined {
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
     color: var(--paragraph);
 }
 
@@ -163,7 +163,7 @@
 }
 
 .reply-container .icons i {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     color: var(--text);
     padding-top: 1rem;
     padding-bottom: 0.5rem;
@@ -183,7 +183,7 @@
     width: 100%;
     outline: 0;
     padding: 5rem 3rem;
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     height: 15rem;
     resize: none;
     background-color: var(--reply);
@@ -204,7 +204,7 @@
     width: 100%;
     outline: 0;
     padding: 1rem 3rem;
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     resize: none;
     background-color: var(--reply);
     border: none;
@@ -212,4 +212,18 @@
     margin-bottom: 0.2rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+}
+
+.reply-container #new-post {
+    color: var(--text);
+    font-size: calc(2rem * var(--font-size));
+}
+
+.reply-container #categories-name {
+    outline: none;
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    color: var(--text);
+    border-radius: 0.5rem;
+    font-size: calc(1.6rem * var(--font-size));
 }

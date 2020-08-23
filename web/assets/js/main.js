@@ -39,18 +39,7 @@ window.onload = function() {
         localStorage.setItem('theme', 'light-theme');
     }
 
-    toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));
-
-    // reply
-    const replyButton = document.querySelector('#reply-top');
-
-    if (replyButton) {
-        if (!localStorage.getItem('profile')) {
-            replyButton.href = '/web/public/login.html';
-            return;
-        }
-        replyButton.addEventListener('click', replyPost);
-    }
+    toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));    
 
     const addTopic = document.querySelector('.new-topic-container');
 
@@ -62,6 +51,15 @@ window.onload = function() {
     }
 
     handleLogout();
+
+    // Font size
+    const normal = document.querySelector('#normalize-font-btn');
+    const increase = document.querySelector('#increase-font-btn');
+    const decrease = document.querySelector('#decrease-font-btn');
+
+    normal && (normal.addEventListener('click', normalizeFontSize));
+    increase && (increase.addEventListener('click', increaseFontSize));
+    decrease && (decrease.addEventListener('click', decreaseFontSize));
 }
 
 function toggleTheme(e) {
@@ -109,12 +107,17 @@ function handleLogout() {
     }
 }
 
-
-function showWarningMessage(id, message, changeInputColor) {
+function showWarningMessage(id, message, changeInputColor, isInputGroup=false) {
     // TODO: mudar cor do texto e da borda
     const div = document.querySelector('#' + id);
     const span = div.children[1];
-    const input = div.previousElementSibling.children[0];
+
+    if (!isInputGroup) {
+        const input = div.previousElementSibling.children[0];
+    } else {
+        const input = div; // TODO
+    }
+    
 
     div.style.visibility = 'visible';
     span.innerHTML = message;
@@ -129,4 +132,64 @@ function hideWarningMessage(id) {
     div.style.visibility = 'hidden';
     span.innerHTML = '';
     input.style.borderBottomColor = 'var(--text)';
+}
+
+function getQueryParameter(variable) {
+    let query = decodeURIComponent(window.location.search.substring(1));
+    let vars = query.split('&');
+
+    for (let i = 0; i < vars.length; i++) {
+        let pair = vars[i].split('=');
+        if (pair[0] === variable) {
+            return pair[1];
+        }
+    }
+    return (false);
+}
+
+function formatTime (date) {
+    let hour = addZeroBefore(date.getHours());
+    let minutes =  addZeroBefore(date.getMinutes());
+    let seconds = addZeroBefore(date.getSeconds());
+    let formattedTime = `${hour}:${minutes}:${seconds}`;
+
+    return formattedTime;
+}
+
+function formatDatetime(datetime) {
+    const date = new Date(datetime);
+
+    let day = addZeroBefore(date.getDate());
+    let month = capitalize(date.toLocaleString('pt-br', { month: 'long' }));
+    let year = date.getFullYear();
+    let formattedDate = `${day} de ${month} de ${year}, ${formatTime(date)}`;
+
+    return formattedDate;
+}
+
+function addZeroBefore(n) {
+    return n < 10 ? '0' + n : n;
+}
+
+function capitalize(s) {
+    return s[0].toUpperCase() + s.slice(1);
+}
+
+function increaseFontSize() {
+    const root = document.documentElement;
+    let size = Number(root.style.getPropertyValue('--font-size'));
+    if (!size)  size = 1;
+    root.style.setProperty('--font-size', size + 0.1);
+}
+
+function decreaseFontSize() {
+    const root = document.documentElement;
+    let size = Number(root.style.getPropertyValue('--font-size'));
+    if (!size) size = 1;
+    root.style.setProperty('--font-size', size - 0.1);
+}
+
+function normalizeFontSize() {
+    const root = document.documentElement;
+    root.style.setProperty('--font-size', 1);
 }

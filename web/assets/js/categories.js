@@ -19,7 +19,6 @@ function getCategories() {
         })
         .then((responseJSON) => {
             if (statusCode === 200) {
-                console.log(responseJSON)
                 fillCategories(responseJSON);
             }
         });
@@ -27,24 +26,21 @@ function getCategories() {
 
 function fillCategories(categories) {
     const container = document.querySelector('.grid.main-categories');
-    let numberOfTopics = 0;
     let numberOfPosts = 0;
 
     for (let i = 0; i < categories.length; i++) {
-        
-
         container.insertAdjacentHTML('beforeend',
             '<div class="row">' +
                 '<div class="left-side">' +
                     '<div class="icon"></div>' +
                     '<div class="info">' +
-                        '<a href="/web/public/category.html" class="title">' + categories[i].title + '</a>' +
+                        '<a href="/web/public/category.html?category=' + categories[i].title + '" class="title">' + categories[i].title + '</a>' +
                         '<p class="description">' + categories[i].description + '</p>' +
                     '</div>' +
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">' + numberOfTopics + '</li>' +
+                        '<li class="number">' + categories[i].topics.length + '</li>' +
                         '<li class="number">' + numberOfPosts + '</li>' +
                         '<li class="last-post">' +
                             '<a href="#">Tutorial</a>' +

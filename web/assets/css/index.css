@@ -54,7 +54,7 @@ header.menu nav ul li {
 
 header.menu nav ul li a i {
     position: absolute;
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     color: var(--text);
     top: 50%;
     transform: translateY(-50%);
@@ -66,7 +66,7 @@ header.menu nav ul li:last-child {
 }
 
 header.menu nav ul li a {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     text-decoration: none;
     color: var(--text);
 }
@@ -146,20 +146,19 @@ input:checked + .slider:before {
 .font-size-btn{
     width: 3.4rem;
     height: 3.4rem;
-    font-size: 1.5rem;
+    font-size: calc(1.5rem * var(--font-size));
     color: var(--white);
     background-color: var(--primary);
     border: none;
     border-radius: 0.5rem;
     outline: none;
     cursor: pointer;
+    margin: 0 0.25rem;
 }
 .font-size-btn:hover{
     opacity: 0.8;
 }
-#increase-font-btn{
-    margin-left: 0.5rem;
-}
+
 .main-content {
     height: auto;
     max-height: 75rem;
@@ -230,7 +229,7 @@ input:checked + .slider:before {
 .grid header a,
 .grid header h1,
 .grid header ul li {
-    font-size: 1.8rem;
+    font-size: calc(1.8rem * var(--font-size));
     color: var(--text);
 }
 
@@ -260,6 +259,7 @@ input:checked + .slider:before {
     align-items: center;
     justify-content: flex-start;
     width: 60%;
+    padding-right: 1rem;
 }
 
 .grid .row .left-side .icon {
@@ -279,7 +279,7 @@ input:checked + .slider:before {
 }
 
 .grid .row .left-side .title {
-    font-size: 1.8rem;
+    font-size: calc(1.8rem * var(--font-size));
     font-weight: bold;
     color: var(--text);
     text-decoration: none;
@@ -290,7 +290,7 @@ input:checked + .slider:before {
 }
 
 .grid .row .left-side .info p {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--font-size));
     color: var(--text);
 }
 
@@ -310,7 +310,7 @@ input:checked + .slider:before {
 }
 
 .grid .row .right-side ul .number {
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
     color: var(--text);
 }
 
@@ -322,7 +322,7 @@ input:checked + .slider:before {
 }
 
 .grid .row .right-side ul .last-post a {
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
     color: var(--text);
     text-overflow: ellipsis;
     overflow: hidden;
@@ -334,22 +334,22 @@ input:checked + .slider:before {
 }
 
 .grid .row .right-side ul .last-post p {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--font-size));
     color: var(--text);
 }
 
 .grid .row .right-side ul .last-post p span {
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
     color: var(--primary);
 }
 
 .grid .row .right-side ul .last-post span {
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--font-size));
     color: var(--text);
 }
 
 .grid .row .right-side ul .author a {
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
     color: var(--text);
     text-overflow: ellipsis;
     overflow: hidden;
@@ -363,7 +363,7 @@ input:checked + .slider:before {
 .grid .row .right-side ul .actions {
     display: flex;
     flex-direction: row;
-    font-size: 14px;
+    font-size: calc(14px * var(--font-size));
     color: var(--text);
     text-overflow: ellipsis;
     overflow: hidden;
@@ -388,7 +388,7 @@ input:checked + .slider:before {
     position: relative;
 }
 .trending-heading{
-    font-size: 3rem;
+    font-size: calc(3rem * var(--font-size));
     color: var(--primary);
 }
 .trending__item{
@@ -403,7 +403,7 @@ input:checked + .slider:before {
 }
 .trending__item a{
     text-decoration: none;
-    font-size: 1.9rem;
+    font-size: calc(1.9rem * var(--font-size));
     color: var(--text);
     display: inline-block;
     margin-bottom: 0.2rem;
@@ -413,24 +413,24 @@ input:checked + .slider:before {
 }
 .trending__item p{
     color: var(--text);
-    font-size: 1.3rem;
+    font-size: calc(1.3rem * var(--font-size));
 }
 .trending__item .trending-info{
     color: var(--text);
-    font-size: 1.3rem;
+    font-size: calc(1.3rem * var(--font-size));
 }
 .trending__item .trending-info{
     color: var(--text);
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
 
 }
 .trending__item .trending-date{
     color: var(--text);
-    font-size: 1.3rem;
+    font-size: calc(1.3rem * var(--font-size));
 }
 .trending__item p span{
     color: var(--primary);
-    font-size: 1.4rem;
+    font-size: calc(1.4rem * var(--font-size));
 }
 .trending__item hr{
     width: 100%;
@@ -453,7 +453,7 @@ input:checked + .slider:before {
     transition: 0.3s ease-in-out;
     text-decoration: none;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: calc(1.5rem * var(--font-size));
     font-weight: bold;
 }
 
@@ -466,7 +466,7 @@ input:checked + .slider:before {
 
 .trending .new-topic-container i {
     color: var(--white);
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     padding-right: 1rem;
 }
 /*TRENDING SECTION FIM*/
@@ -501,12 +501,12 @@ input:checked + .slider:before {
     box-shadow: 0rem 0.6rem 0.5rem 0.2rem rgba(82, 4, 53, 0.2);
 }
 .about-title{
-    font-size: 4rem;
+    font-size: calc(4rem * var(--font-size));
     color: var(--secondary);
     font-weight: 300;
 }
 .about-subtitle{
-    font-size: 1.8rem;
+    font-size: calc(1.8rem * var(--font-size));
     color: var(--primary);
     font-weight: 500;
 }
@@ -517,7 +517,7 @@ input:checked + .slider:before {
     background-color: var(--primary);
     color: var(--text);
     border-radius: 1rem;
-    font-size: 1.7rem;
+    font-size: calc(1.7rem * var(--font-size));
 
 }
 .features{
@@ -534,7 +534,7 @@ input:checked + .slider:before {
     column-gap: 2.5rem;
 }
 .feature__text{
-        font-size: 1.7rem;
+        font-size: calc(1.7rem * var(--font-size));
         color: var(--text);
 }
 .feature__icon{
@@ -545,7 +545,7 @@ input:checked + .slider:before {
         transform: translateY(-1rem);
 }
 .heading-4{
-    font-size: 1.9rem;
+    font-size: calc(1.9rem * var(--font-size));
     font-weight: 400;
 }
 .heading-4--dark{
@@ -558,7 +558,7 @@ input:checked + .slider:before {
     grid-column: 1/-1;
     grid-row: 1/2;
     align-self: center;
-    font-size: 2.4rem;
+    font-size: calc(2.4rem * var(--font-size));
     font-weight: 700;
     color: #ffa1dc;
     margin-left: 1rem;

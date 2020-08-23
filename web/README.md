@@ -19,10 +19,10 @@ O Layout da aplicação foi definido utilizando o display grid e o display flexb
 ## TODO
 
 - [ ]  Adicionar função para diminuir/aumentar o tamanho da fonte;
-- [ ] Realizar chamadas no backend para popular os dados dinamicamente;
+- [x] Realizar chamadas no backend para popular os dados dinamicamente;
 - [ ] Adicionar media queries para dá suporte a outras resoluções;
 - [ ] Adicionar status do usuário na tela de gerenciamento;
 - [ ] Adicionar modal com informações do usuário na tela de gerenciamento;
 - [ ] Adicionar botão de criar novo tópico em outras telas;
-- [ ] Adicionar a opção de categoria ao adicionar novo tópico;
+- [x] Adicionar a opção de categoria ao adicionar novo tópico;
 - [ ] Adicionar função para procurar por palavras chave na tela de post;

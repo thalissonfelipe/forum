@@ -48,7 +48,6 @@ function handleLogin() {
                 })
                 .then((responseJSON) => {
                     if (statusCode === 200) {
-                        console.log(responseJSON)
                         localStorage.setItem('profile', responseJSON.profile);
                         localStorage.setItem('registry', responseJSON.registry);
                         location.href = '/web/public/index.html';

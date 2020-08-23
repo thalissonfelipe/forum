@@ -30,7 +30,7 @@
 }
 
 .profile .form h1 {
-    font-size: 2rem;
+    font-size: calc(2rem * var(--font-size));
     color: var(--text);
     padding-bottom: 2rem;
 }

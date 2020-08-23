@@ -41,8 +41,8 @@ function fillUsers(users) {
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number"></li>' +
-                        '<li class="number">10</li>' +
+                        '<li></li>' +
+                        '<li class="number">' + users[i].posts + '</li>' +
                         '<li class="actions">' +
                             '<a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>' +
                             '<a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>' +
