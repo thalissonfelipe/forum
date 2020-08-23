@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema({
     },
     profile: {
         type: String,
-        unique: true,
         default: 'common'
     },
     created_at: {
@@ -48,6 +47,7 @@ const UserSchema = new mongoose.Schema({
     },
     posts: {
         type: Number,
+        default: 0,
         required: [true, 'Missing posts field']
     }
 });

@@ -12,5 +12,11 @@ module.exports = {
     },
     getJwtExpires: function () {
         return config.API.jwt.expires;
+    },
+    getEmail: function () {
+        return config.API.mail.email;
+    },
+    getPassword: function () {
+        return config.API.mail.password;
     }
 };

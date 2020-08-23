@@ -1,4 +1,6 @@
 const Category = require('../models/Category');
+const Post = require('../models/Post');
+const User = require('../models/User');
 
 class CategoriesController {
     async index (request, response) {
@@ -13,11 +15,22 @@ class CategoriesController {
 
     async show (request, response) {
         try {
-            const { title } = request.params;
-            const category = await Category.findOne({ title });
+            const category = await Category.findOne({ title: request.params.title });
 
             if (category) {
-                response.status(200).send(category);
+                const body = {
+                    title: category.title,
+                    description: category.description,
+                    posts: []
+                };
+
+                for (let i = 0; i < category.topics.length; i++) {
+                    const { title, _id, userId } = await Post.findById(category.topics[i]);
+                    const { name } = await User.findById(userId);
+                    body.posts.push({ title, id: _id, author: name });
+                }
+
+                response.status(200).send(body);
             } else {
                 response.status(404).json({ message: 'Category not found' });
             }

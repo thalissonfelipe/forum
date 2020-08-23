@@ -1,10 +1,12 @@
 const Comment = require('../models/Comment');
-const APIFeatures = require('../utils/apiFeatures');
 
 class CommentsController {
     async createComment (request, response) {
         try {
-            const newComment = await Comment.create(request.body);
+            const newComment = await Comment.create({
+                ...request.body,
+                userId: request.userid
+            });
 
             response.status(200).json({
                 status: 'Success',
@@ -42,27 +44,11 @@ class CommentsController {
 
     async showAllComments (request, response) {
         try {
-            // EXECUTE QUERY
-            const features = new APIFeatures(Comment.find(), request.query)
-                .filter()
-                .sort()
-                .limitFields()
-                .paginate();
-            const comments = await features.query;
-            // SEND RESPONSE
-            response.status(200).json({
-                status: 'Success',
-                requestedAt: request.requestTime,
-                results: comments.length,
-                data: {
-                    tours: comments
-                }
-            });
+            const comments = await Comment.find({});
+
+            response.status(200).json(comments);
         } catch (err) {
-            response.status(500).json({
-                status: 'Fail',
-                message: err
-            });
+            response.status(500).json({ message: err.message });
         }
     }
 

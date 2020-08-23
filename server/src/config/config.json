@@ -5,6 +5,10 @@
         "jwt": {
             "secret": "desenvolvimentoweb",
             "expires": 3600
+        },
+        "mail": {
+            "email": "buster17@ethereal.email",
+            "password": "C4nQHgMVDHSatdFVbj"
         }
     }
 }
