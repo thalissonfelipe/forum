@@ -160,8 +160,8 @@ input:checked + .slider:before {
 }
 
 .main-content {
-    height: auto;
-    max-height: 75rem;
+    /* height: auto; */
+    min-height: 70rem;
     min-width: 100rem;
     background-color: var(--main);
     display: grid;
@@ -190,7 +190,7 @@ input:checked + .slider:before {
 }
 
 .grid-mgm{
-    min-height: 75rem;
+    /* min-height: 75rem; */
 }
 
 .grid.main-categories {
@@ -487,7 +487,7 @@ input:checked + .slider:before {
 /*PÁGINA SOBRE*/
 .main-content-about {
     height: auto;
-    max-height: 75rem;
+    min-height: 70rem;
     min-width: 100rem;
     background-color: var(--main);
     display: flex;
@@ -521,7 +521,7 @@ input:checked + .slider:before {
 
 }
 .features{
-    margin: 15rem 0;
+    margin: 6rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(25rem,1fr));
     gap: 6rem;
@@ -560,7 +560,7 @@ input:checked + .slider:before {
     align-self: center;
     font-size: calc(2.4rem * var(--font-size));
     font-weight: 700;
-    color: #ffa1dc;
+    color: var(--primary);
     margin-left: 1rem;
     margin-top: 8rem;
 }
@@ -572,6 +572,7 @@ input:checked + .slider:before {
 
 .grid.last-posts.grid-category-page-fix{
     grid-column: 1/-1 !important;
+    margin-top: -6rem;
 }
 /*category page end*/
 
