@@ -37,5 +37,6 @@ routes.post('/categories', categoriesController.create);
 // Comment routes
 routes.get('/comments', commentsController.showAllComments);
 routes.post('/comments', middlewares, commentsController.createComment);
+routes.delete('/comments/:id', middlewares, commentsController.deleteComment);
 
 module.exports = routes;

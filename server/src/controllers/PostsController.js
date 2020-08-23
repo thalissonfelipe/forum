@@ -62,7 +62,9 @@ class PostsController {
                     body: posts[i].body,
                     userId: posts[i].userId,
                     createdAt: posts[i].createdAt,
-                    author: user.name
+                    author: user.name,
+                    visits: posts[i].visits,
+                    comments: posts[i].comments
                 });
             }
 
@@ -108,7 +110,11 @@ class PostsController {
 
     async getPost (request, response) {
         try {
-            const post = await Post.findById(request.params.id);
+            const post = await Post.findByIdAndUpdate(request.params.id, {
+                $inc: {
+                    visits: 1
+                }
+            });
             const user = await User.findById(post.userId);
             const comments = await Comment.find({ postId: request.params.id });
 

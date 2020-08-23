@@ -25,9 +25,15 @@ class CategoriesController {
                 };
 
                 for (let i = 0; i < category.topics.length; i++) {
-                    const { title, _id, userId } = await Post.findById(category.topics[i]);
+                    const { title, _id, userId, visits, comments } = await Post.findById(category.topics[i]);
                     const { name } = await User.findById(userId);
-                    body.posts.push({ title, id: _id, author: name });
+                    body.posts.push({
+                        title,
+                        id: _id,
+                        author: name,
+                        visits,
+                        comments
+                    });
                 }
 
                 response.status(200).send(body);

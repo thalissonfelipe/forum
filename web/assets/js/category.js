@@ -28,8 +28,6 @@ function getCategory() {
 
 function fillCategory(category) {
     let container = document.querySelector('.main-content');
-    let numberOfVisits = 0;
-    let numberOfComments = 0;
 
     container.insertAdjacentHTML('beforeend',
         '<div class="path category">' +
@@ -65,8 +63,8 @@ function fillCategory(category) {
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">' + numberOfVisits + '</li>' +
-                        '<li class="number">' + numberOfComments + '</li>' +
+                        '<li class="number">' + category.posts[i].visits + '</li>' +
+                        '<li class="number">' + category.posts[i].comments + '</li>' +
                         '<li class="author">' +
                             '<a href="#">' + category.posts[i].author.split(' ')[0] + '</a>' +
                         '</li>' +

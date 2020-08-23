@@ -134,8 +134,8 @@ function fillHome({ categories, posts }) {
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">2</li>' +
-                        '<li class="number">10</li>' +
+                        '<li class="number">' + posts[i].visits + '</li>' +
+                        '<li class="number">' + posts[i].comments + '</li>' +
                         '<li class="author">' +
                             '<a href="#">' + posts[i].author.split(' ')[0] + '</a>' +
                         '</li>' +

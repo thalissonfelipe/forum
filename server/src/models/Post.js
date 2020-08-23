@@ -18,6 +18,14 @@ const postSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Category missing']
+    },
+    visits: {
+        type: Number,
+        default: 0
+    },
+    comments: {
+        type: Number,
+        default: 0
     }
 });
 

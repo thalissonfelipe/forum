@@ -1,3 +1,4 @@
+const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 
 class CommentsController {
@@ -6,6 +7,11 @@ class CommentsController {
             const newComment = await Comment.create({
                 ...request.body,
                 userId: request.userid
+            });
+            await Post.findByIdAndUpdate(request.body.postId, {
+                $inc: {
+                    comments: 1
+                }
             });
 
             response.status(200).json({
@@ -55,6 +61,7 @@ class CommentsController {
     async deleteComment (request, response) {
         try {
             await Comment.findByIdAndDelete(request.params.id);
+            // TODO - Decrementar um comentário do post
             response.status(200).json({
                 status: 'Success',
                 data: null
