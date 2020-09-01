@@ -20,10 +20,12 @@ function getPost() {
         .then((responseJSON) => {
             if (statusCode === 200) {
                 fillPost(responseJSON);
-                const search = document.querySelector('#search');
-                search.addEventListener('keyup', function() {
-                    // filterComments(responseJSON);
-                });
+                // const search = document.querySelector('#search');
+                // search.addEventListener('keyup', function() {
+                //     // filterComments(responseJSON);
+                // });
+            } else if (statusCode === 400 || statusCode === 404) {
+                location.href = '/web/public/not_found.html';
             }
         });
 }
@@ -42,6 +44,11 @@ function filterComments({ post, comments }) {
 function fillPost({ post, comments }) {
     const container = document.querySelector('.main-content');
     container.innerHTML = '';
+
+    let author = post.user.profile === 'admin' ? 'Admin' : post.user.name.split(' ')[0];
+    let spanPosts = post.user.profile === 'admin' ? '' : '<p class="posts">Total de posts: <span>' + post.user.posts + '</span></p>';
+    let buttonsClass = localStorage.getItem('profile') === 'admin' ? 'buttons can-update' : 'buttons';
+    let commentsIds = [];
 
     container.insertAdjacentHTML('beforeend',
         '<div class="header">' +
@@ -72,30 +79,44 @@ function fillPost({ post, comments }) {
                 '<p>' + post.body +'</p>' +
             '</div>' +
             '<div class="user-info">' +
-                '<span>' + post.user.name.split(' ')[0] + '</span>' +
-                '<p class="posts">Total de posts: <span>' + post.user.posts + '</span></p>' +
+                '<div id="buttons-post" class="' + buttonsClass + '">' +
+                    '<a class="button-icon" id="update-post"><i class="fa fa-pencil" aria-hidden="true"></i></a>' +
+                    '<a class="button-icon" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
+                '</div>' +
+                '<img class="icon" src="' + getAvatarSrc(post.user.userImage, post.user.userImageType) + '" />' +
+                '<span id="userid" data-id=">' + post.user.id + '">' + author + '</span>' +
+                spanPosts +
                 '<p class="joined">Entrou: <span>' + formatDatetime(post.user.createdAt) + '</span></p>' +
             '</div>' +
         '</div>'
     );
 
-    for (let i = 0; i < comments.length; i++) {
+    comments.map(comment => {
+        author = comment.user.profile === 'admin' ? 'Admin' : comment.user.name.split(' ')[0];
+        spanPosts = comment.user.profile === 'admin' ? '' : '<p class="posts">Total de posts: <span>' + comment.user.posts + '</span></p>';
+        commentsIds.push(comment.user.id);
+
         container.insertAdjacentHTML('beforeend',
             '<div class="container">' +
                 '<div class="post">' +
                     '<i class="fa fa-quote-right" aria-hidden="true"></i>' +
                     '<h1>Re: ' + post.title + '</h1>' +
-                    '<span>' + formatDatetime(comments[i].createdAt) + '</span>' +
-                    '<p>' + comments[i].body +'</p>' +
+                    '<span>' + formatDatetime(comment.createdAt) + '</span>' +
+                    '<p>' + comment.body +'</p>' +
                 '</div>' +
                 '<div class="user-info">' +
-                    '<span>' + comments[i].user.name.split(' ')[0] + '</span>' +
-                    '<p class="posts">Total de posts: <span>' + comments[i].user.posts + '</span></p>' +
-                    '<p class="joined">Entrou: <span>' + formatDatetime(comments[i].user.createdAt) + '</span></p>' +
+                    '<div class="' + buttonsClass + '">' +
+                        '<a class="button-icon"><i class="fa fa-pencil" aria-hidden="true"></i></a>' +
+                        '<a class="button-icon" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="deleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
+                    '</div>' +
+                    '<img class="icon" src="' + getAvatarSrc(comment.user.userImage, comment.user.userImageType) + '" />' +
+                    '<span>' + author + '</span>' +
+                    spanPosts +
+                    '<p class="joined">Entrou: <span>' + formatDatetime(comment.user.createdAt) + '</span></p>' +
                 '</div>' +
             '</div>'
         );
-    }
+    });
 
     container.insertAdjacentHTML('beforeend',
         '<div id="reply-container" class="reply-container">' +
@@ -112,6 +133,8 @@ function fillPost({ post, comments }) {
             '</div>' +
         '</div>'
     );
+
+    checkUser(post.user.id, commentsIds);
 }
 
 function addComment() {
@@ -133,7 +156,7 @@ function addComment() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ commentBody, postId: getQueryParameter('id') })
+            body: JSON.stringify({ commentBody, postId: getQueryParameter('id'), category: getQueryParameter('category') })
         };
 
         fetch('/comments', options)
@@ -144,4 +167,49 @@ function addComment() {
                 }
             });
     });
+}
+
+function deleteItem(type, anchor=null) {
+    const url = anchor !== null ? `/${type}/${anchor.getAttribute('commentId')}` : `/${type}/${getQueryParameter('id')}`;
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+
+    fetch(url, options)
+        .then((response) => {
+            console.log(response)
+            if (response.status === 200) {
+                if (!anchor) {
+                    location.href = `/web/public/category.html?category=${getQueryParameter('category')}`;
+                } else {
+                    getPost();
+                }
+            }
+        });
+}
+
+async function checkUser(postId, commentsIds) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
+
+    const response = await fetch(`/users/${localStorage.getItem('registry')}`, options);
+    const { _id } = await response.json();
+
+    if (_id === postId) {
+        document.getElementById('buttons-post').classList.add('can-update');
+    }
+
+    if (commentsIds.includes(_id)) {
+        document.getElementById(_id).parentElement.classList.add('can-update');
+    }
+
 }

@@ -26,30 +26,33 @@ function getCategories() {
 
 function fillCategories(categories) {
     const container = document.querySelector('.grid.main-categories');
-    let numberOfPosts = 0;
 
-    for (let i = 0; i < categories.length; i++) {
+    categories.map(category => {
+        let lastPost = category.lastPost ?
+            '<li class="last-post">' +
+                '<a href="/web/public/post.html?category=' + category.title + '&id=' + category.lastPost.id  + '" class="title">' + category.lastPost.title + '</a>' +
+                '<p>by <span>' + category.lastPost.author.split(' ')[0] + '</span></p>' +
+                '<span>' + formatDatetime(category.lastPost.createdAt) + '</span>' +
+            '</li>' :
+            '<li class="last-post"><a>0 posts</a></li>';
+
         container.insertAdjacentHTML('beforeend',
-            '<div class="row">' +
+            '<div class="row categories">' +
                 '<div class="left-side">' +
-                    '<div class="icon"></div>' +
+                    '<img class="icon" src="' + getAvatarSrc(category.image, category.imagetype) + '" />' +
                     '<div class="info">' +
-                        '<a href="/web/public/category.html?category=' + categories[i].title + '" class="title">' + categories[i].title + '</a>' +
-                        '<p class="description">' + categories[i].description + '</p>' +
+                        '<a href="/web/public/category.html?category=' + category.title + '" class="title">' + category.title + '</a>' +
+                        '<p class="description">' + category.description + '</p>' +
                     '</div>' +
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">' + categories[i].topics.length + '</li>' +
-                        '<li class="number">' + numberOfPosts + '</li>' +
-                        '<li class="last-post">' +
-                            '<a href="#">Tutorial</a>' +
-                            '<p>by <span>Admin</span></p>' +
-                            '<span>08 de Agosto de 2020, 09:30</span>' +
-                        '</li>' +
+                        '<li class="number">' + category.topics.length + '</li>' +
+                        '<li class="number">' + category.comments + '</li>' +
+                        lastPost +
                     '</ul>' +
                 '</div>' +
             '</div>'
         );
-    }
+    });
 }

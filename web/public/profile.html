@@ -84,23 +84,28 @@
                 <form>
                     <h1>Trocar senha</h1>
                     <div class="input-container">
-                        <input type="password" name="password" id="password" placeholder="Nova senha" required autocomplete="off" />
+                        <input type="password" name="password" id="password" placeholder="Nova senha" oninput="hideWarningMessage('div-repeat-password')" required autocomplete="off" />
                         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                         <i id="eye-icon" class="fa fa-eye eye-icon" aria-hidden="true" onclick="togglePassword('eye-icon')"></i>
                     </div>
                     <div class="input-container">
-                        <input type="password" name="repeat-password" id="repeat-password" placeholder="Confirmar senha" required autocomplete="off" />
+                        <input type="password" name="repeat-password" id="repeat-password" oninput="hideWarningMessage('div-repeat-password')" placeholder="Confirmar senha" required autocomplete="off" />
                         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                         <i id="eye-icon-repeat" class="fa fa-eye eye-icon" aria-hidden="true" onclick="togglePassword('eye-icon-repeat')"></i>
                     </div>
+                    <div id="div-repeat-password" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                     <div class="input-container">
-                        <input type="submit" name="submit" value="Atualizar senha" />
+                        <input type="submit" name="submit" id="reset-password-button" value="Atualizar senha" />
                     </div>
                 </form>
             </div>
         </section>
     </div>
     <script src="/web/assets/js/main.js"></script>
+    <script src="/web/assets/js/password.js"></script>
     <script src="/web/assets/js/profile.js"></script>
 </body>
 </html>

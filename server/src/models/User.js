@@ -49,6 +49,22 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         default: 0,
         required: [true, 'Missing posts field']
+    },
+    resetPasswordToken: {
+        type: String,
+        default: undefined
+    },
+    resetPasswordExpires: {
+        type: Date,
+        default: undefined
+    },
+    image: {
+        type: Buffer,
+        default: undefined
+    },
+    imagetype: {
+        type: String,
+        default: undefined
     }
 });
 

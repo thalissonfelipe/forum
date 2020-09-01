@@ -4,13 +4,13 @@ document.onreadystatechange = function() {
     const managementItem = document.querySelector('#management-item');
     const logoutItem = document.querySelector('#logout-item');
 
-    if (loginItem && profileItem && logoutItem) {
+    if (loginItem && profileItem && logoutItem && managementItem) {
         if (localStorage.getItem('profile') === 'common') {
             profileItem.style.display = 'inline';
             logoutItem.style.display = 'inline';
             loginItem.style.display = 'none';
         } else if (localStorage.getItem('profile') === 'admin') {
-            profileItem.style.display = 'inline';
+            profileItem.style.display = 'none';
             managementItem.style.display = 'inline';
             logoutItem.style.display = 'inline';
             loginItem.style.display = 'none';
@@ -24,23 +24,6 @@ document.onreadystatechange = function() {
 };
 
 window.onload = function() {
-    // theme
-    const toggleSwitch = document.querySelector('input[type="checkbox"]');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme) {
-        document.documentElement.className = currentTheme;
-    
-        if (currentTheme === 'dark-theme') {
-            toggleSwitch && (toggleSwitch.checked = true);
-        }
-    } else {
-        document.documentElement.className = 'light-theme';
-        localStorage.setItem('theme', 'light-theme');
-    }
-
-    toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));    
-
     const addTopic = document.querySelector('.new-topic-container');
 
     if (addTopic) {
@@ -50,16 +33,9 @@ window.onload = function() {
         }
     }
 
+    handleTheme();
     handleLogout();
-
-    // Font size
-    const normal = document.querySelector('#normalize-font-btn');
-    const increase = document.querySelector('#increase-font-btn');
-    const decrease = document.querySelector('#decrease-font-btn');
-
-    normal && (normal.addEventListener('click', normalizeFontSize));
-    increase && (increase.addEventListener('click', increaseFontSize));
-    decrease && (decrease.addEventListener('click', decreaseFontSize));
+    handleFontSize();
 }
 
 function toggleTheme(e) {
@@ -107,21 +83,46 @@ function handleLogout() {
     }
 }
 
-function showWarningMessage(id, message, changeInputColor, isInputGroup=false) {
+function handleFontSize() {
+    const normal = document.querySelector('#normalize-font-btn');
+    const increase = document.querySelector('#increase-font-btn');
+    const decrease = document.querySelector('#decrease-font-btn');
+
+    normal && (normal.addEventListener('click', normalizeFontSize));
+    increase && (increase.addEventListener('click', increaseFontSize));
+    decrease && (decrease.addEventListener('click', decreaseFontSize));
+}
+
+function handleTheme() {
+    const toggleSwitch = document.querySelector('input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.documentElement.className = currentTheme;
+        if (currentTheme === 'dark-theme') {
+            toggleSwitch && (toggleSwitch.checked = true);
+        }
+    } else {
+        document.documentElement.className = 'light-theme';
+        localStorage.setItem('theme', 'light-theme');
+    }
+
+    toggleSwitch && (toggleSwitch.addEventListener('click', toggleTheme, false));  
+}
+
+function showWarningMessage(id, message, changeInputColor=false, isInputGroup=false) {
     // TODO: mudar cor do texto e da borda
     const div = document.querySelector('#' + id);
     const span = div.children[1];
 
-    if (!isInputGroup) {
-        const input = div.previousElementSibling.children[0];
-    } else {
-        const input = div; // TODO
-    }
-    
+    // if (!isInputGroup) {
+    //     const input = div.previousElementSibling.children[0];
+    // } else {
+    //     const input = div; // TODO
+    // }
 
     div.style.visibility = 'visible';
     span.innerHTML = message;
-    changeInputColor && (input.style.borderBottomColor = 'red');
 }
 
 function hideWarningMessage(id) {
@@ -192,4 +193,22 @@ function decreaseFontSize() {
 function normalizeFontSize() {
     const root = document.documentElement;
     root.style.setProperty('--font-size', 1);
+}
+
+function getAvatarSrc(buffer, bufferType) {
+    let src = '/web/assets/img/default-avatar.png';
+
+    if (buffer) {
+        let b64encoded = btoa(String.fromCharCode.apply(null, buffer.data));
+        src = `data:${bufferType};base64,${b64encoded}`;
+    }
+
+    return src;
+}
+
+function redirectPage() {
+    if (localStorage.getItem('profile') === 'admin') {
+        location.href = '/web/public/index.html';
+    }
+    return;
 }

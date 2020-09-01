@@ -75,38 +75,45 @@ function fillHome({ categories, posts }) {
                 '<a href="/web/public/categories.html">Principais categorias</a>' +
                 '<ul>' +
                     '<li>Tópicos</li>' +
-                    '<li>Posts</li>' +
+                    '<li>Comentários</li>' +
                     '<li>Last post</li>' +
                 '</ul>' +
             '</header>'
     );
 
     container = document.querySelector('.grid.main-categories');
+    const mainCategories = categories.sort(function(a, b) {
+        return (b.topics.length + b.comments) - (a.topics.length + a.comments);
+    }).slice(0, 5);
 
-    for (let i = 0; i < categories.length; i++) {
+    mainCategories.map(category => {
+        let lastPost = category.lastPost ?
+            '<li class="last-post">' +
+                '<a href="/web/public/post.html?category=' + category.title + '&id=' + category.lastPost.id  + '" class="title">' + category.lastPost.title + '</a>' +
+                '<p>by <span>' + category.lastPost.author.split(' ')[0] + '</span></p>' +
+                '<span>' + formatDatetime(category.lastPost.createdAt) + '</span>' +
+            '</li>' :
+            '<li class="last-post"><a>0 posts</a></li>';
+
         container.insertAdjacentHTML('beforeend',
-            '<div class="row">' +
+            '<div class="row categories">' +
                 '<div class="left-side">' +
-                    '<div class="icon"></div>' +
+                '<img class="icon" src="' + getAvatarSrc(category.image, category.imagetype) + '" />' +
                     '<div class="info">' +
-                        '<a href="/web/public/category.html?category=' + categories[i].title + '" class="title">' + categories[i].title + '</a>' +
-                        '<p class="description">' + categories[i].description + '</p>' +
+                        '<a href="/web/public/category.html?category=' + category.title + '" class="title">' + category.title + '</a>' +
+                        '<p class="description">' + category.description + '</p>' +
                     '</div>' +
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">2</li>' +
-                        '<li class="number">10</li>' +
-                        '<li class="last-post">' +
-                            '<a href="#">Tutorial</a>' +
-                            '<p>by <span>Admin</span></p>' +
-                            '<span>08 de Agosto de 2020, 09:30</span>' +
-                        '</li>' +
+                        '<li class="number">' + category.topics.length + '</li>' +
+                        '<li class="number">' + category.comments + '</li>' +
+                        lastPost +
                     '</ul>' +
                 '</div>' +
             '</div>'
         );
-    }
+    });
 
     container.insertAdjacentHTML('beforeend', '</div>');
     container = document.querySelector('.main-content');
@@ -124,59 +131,61 @@ function fillHome({ categories, posts }) {
     );
 
     container = document.querySelector('.grid.last-posts');
+    const lastPosts = posts.reverse().slice(0, 10);
 
-    for (let i = 0; i < posts.length; i++) {
+    lastPosts.map(post => {
+        let author = post.profile === 'admin' ? 'Admin' : post.author.split(' ')[0];
         container.insertAdjacentHTML('beforeend',
             '<div class="row">' +
                 '<div class="left-side">' +
-                    '<div class="icon"></div>' +
-                    '<a href="/web/public/post.html?category=' + posts[i].category + '&id=' + posts[i]._id  + '" class="title">' + posts[i].title + '</a>' +
+                    '<img class="icon" src="' + getAvatarSrc(post.userImage, post.userImageType) + '" />' +
+                    '<a href="/web/public/post.html?category=' + post.category + '&id=' + post._id  + '" class="title">' + post.title + '</a>' +
                 '</div>' +
                 '<div class="right-side">' +
                     '<ul>' +
-                        '<li class="number">' + posts[i].visits + '</li>' +
-                        '<li class="number">' + posts[i].comments + '</li>' +
+                        '<li class="number">' + post.visits + '</li>' +
+                        '<li class="number">' + post.comments + '</li>' +
                         '<li class="author">' +
-                            '<a href="#">' + posts[i].author.split(' ')[0] + '</a>' +
+                            '<a href="#">' + author + '</a>' +
                         '</li>' +
                     '</ul>' +
                 '</div>' +
             '</div>'
         );
-    }
+    });
 
     container.insertAdjacentHTML('beforeend', '</div>');
     container = document.querySelector('.main-content');
 
+    const mostVisitedPosts = posts.sort(function(a, b) {
+        return b.visits - a.visits;
+    }).slice(0, 3);
+
     container.insertAdjacentHTML('beforeend',
         '<div class="trending">' +
-            '<header class="trending-heading">Mais Acessados</header>' +
+            '<header class="trending-heading">Mais Acessados</header>'
+    );
+
+    container = document.querySelector('.trending');
+
+    mostVisitedPosts.map(post => {
+        container.insertAdjacentHTML('beforeend',
             '<div class = "trending__item">' +
-                '<a href="#">Mecânica dos sólidos</a>' +
-                '<p class = "trending-info">Alguém me ensina francês?</p>' +
-                '<p>by <span>Ícaro</span></p>' +
-                '<span class = "trending-date">12 de Setembro de 2019, 13:30</span>' +
+                '<a href="/web/public/post.html?category=' + post.category + '&id=' + post._id  + '" class="title">' + post.title + '</a>' +
+                '<p class = "trending-info">' + post.body + '</p>' +
+                '<p>by <span>' + post.author.split(' ')[0] + '</span></p>' +
+                '<span class = "trending-date">' + formatDatetime(post.createdAt) + '</span>' +
                 '<hr>' +
-            '</div>' +
-            '<div class = "trending__item">' +
-                '<a href="#">Física quântica</a>' +
-                '<p class = "trending-info">Bichano de Schrödinger</p>' +
-                '<p>by <span>Felipe</span></p>' +
-                '<span class = "trending-date">12 de Setembro de 2010, 13:30</span>' +
-                '<hr>' +
-            '</div>' +
-            '<div class = "trending__item">' +
-                '<a href="#">Trabalho</a>' +
-                '<p class = "trending-info">galera, sobre o trabalho...</p>' +
-                '<p>by <span>Daniel</span></p>' +
-                '<span class = "trending-date">12 de Setembro de 2010, 13:30</span>' +
-                '<hr>' +
-            '</div>' +
-            '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container">' +
-                '<i class="fa fa-plus" aria-hidden="true"></i>' +
-                'TÓPICO' +
-            '</a>' +
-        '</div>'
+            '</div>'
+        );
+    });
+
+    container.insertAdjacentHTML('beforeend',
+        '</div>' +
+        '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container">' +
+            '<i class="fa fa-plus" aria-hidden="true"></i>' +
+            'TÓPICO' +
+        '</a>'
     );
 }
 

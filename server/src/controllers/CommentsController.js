@@ -1,11 +1,13 @@
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
+const Category = require('../models/Category');
 
 class CommentsController {
     async createComment (request, response) {
         try {
-            const newComment = await Comment.create({
-                ...request.body,
+            await Comment.create({
+                commentBody: request.body.commentBody,
+                postId: request.body.postId,
                 userId: request.userid
             });
             await Post.findByIdAndUpdate(request.body.postId, {
@@ -13,38 +15,27 @@ class CommentsController {
                     comments: 1
                 }
             });
-
-            response.status(200).json({
-                status: 'Success',
-                data: {
-                    comment: newComment
+            await Category.findOneAndUpdate({ title: request.body.category }, {
+                $inc: {
+                    comments: 1
                 }
             });
-        } catch (err) {
-            response.status(500).json({
-                status: 'Fail',
-                message: err
-            });
+
+            response.status(200).json({ message: 'OK' });
+        } catch (error) {
+            response.status(500).json({ message: error.message });
         }
     }
 
     async updateComment (request, response) {
         try {
-            const comment = await Comment.findByIdAndUpdate(request.params.id, request.body, {
+            await Comment.findByIdAndUpdate(request.params.id, request.body, {
                 new: true,
                 runValidators: true
             });
-            response.status(200).json({
-                status: 'Success',
-                data: {
-                    comment: comment
-                }
-            });
-        } catch (err) {
-            response.status(500).json({
-                status: 'Fail',
-                message: err
-            });
+            response.status(200).json({ message: 'OK' });
+        } catch (error) {
+            response.status(500).json({ message: error.message });
         }
     }
 
@@ -60,17 +51,11 @@ class CommentsController {
 
     async deleteComment (request, response) {
         try {
-            await Comment.findByIdAndDelete(request.params.id);
-            // TODO - Decrementar um comentário do post
-            response.status(200).json({
-                status: 'Success',
-                data: null
-            });
-        } catch (err) {
-            response.status(500).json({
-                status: 'Fail',
-                message: err
-            });
+            const comment = await Comment.findByIdAndDelete(request.params.id);
+            await Post.findByIdAndUpdate(comment.postId, { $inc: { comments: -1 } });
+            response.status(200).json({ message: 'OK' });
+        } catch (error) {
+            response.status(500).json({ message: error.message });
         }
     }
 }

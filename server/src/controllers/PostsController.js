@@ -1,8 +1,7 @@
-const Post = require('../models/Post');
-const Category = require('../models/Category');
-const Comment = require('../models/Comment');
 const User = require('../models/User');
-// const APIFeatures = require('../utils/apiFeatures');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
+const Category = require('../models/Category');
 
 class PostsController {
     async createPost (request, response) {
@@ -61,6 +60,9 @@ class PostsController {
                     title: posts[i].title,
                     body: posts[i].body,
                     userId: posts[i].userId,
+                    profile: user.profile,
+                    userImage: user.image,
+                    userImageType: user.imagetype,
                     createdAt: posts[i].createdAt,
                     author: user.name,
                     visits: posts[i].visits,
@@ -79,11 +81,7 @@ class PostsController {
     async deletePost (request, response) {
         try {
             await Post.findByIdAndDelete(request.params.id);
-            await User.findByIdAndUpdate(request.userid, {
-                $inc: {
-                    posts: -1
-                }
-            });
+            await User.findByIdAndUpdate(request.userid, { $inc: { posts: -1 } });
 
             const categories = await Category.find({});
             let postId = null;
@@ -110,11 +108,12 @@ class PostsController {
 
     async getPost (request, response) {
         try {
-            const post = await Post.findByIdAndUpdate(request.params.id, {
-                $inc: {
-                    visits: 1
-                }
-            });
+            const post = await Post.findByIdAndUpdate(request.params.id, { $inc: { visits: 1 } });
+
+            if (!post) {
+                return response.status(404).json({ message: 'Post not found' });
+            }
+
             const user = await User.findById(post.userId);
             const comments = await Comment.find({ postId: request.params.id });
 
@@ -123,10 +122,15 @@ class PostsController {
                     title: post.title,
                     body: post.body,
                     createdAt: post.createdAt,
+                    category: post.category,
                     user: {
                         name: user.name,
                         posts: user.posts,
-                        createdAt: user.created_at
+                        createdAt: user.created_at,
+                        userImage: user.image,
+                        userImageType: user.imagetype,
+                        profile: user.profile,
+                        id: user._id
                     }
                 },
                 comments: []
@@ -138,16 +142,24 @@ class PostsController {
                 data.comments.push({
                     body: comments[i].commentBody,
                     createdAt: comments[i].created_at,
+                    id: comments[i]._id,
                     user: {
                         name: userInfo.name,
                         posts: userInfo.posts,
-                        createdAt: userInfo.created_at
+                        createdAt: userInfo.created_at,
+                        userImage: userInfo.image,
+                        userImageType: userInfo.imagetype,
+                        profile: userInfo.profile,
+                        id: userInfo._id
                     }
                 });
             }
 
             response.status(200).json(data);
         } catch (err) {
+            if (err.kind === 'ObjectId') {
+                return response.status(400).json({ message: 'Invalid ID' });
+            }
             response.status(500).json({ message: err.message });
         }
     }

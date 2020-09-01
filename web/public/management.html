@@ -51,102 +51,24 @@
                         <li>Ações</li>
                     </ul>
                 </header>
-                <!-- <div class="row">
-                    <div class="left-side">
-                        <div class="icon"></div>
-                        <div class="info">
-                            <a href="#" class="title">Thalisson</a>
-                            <p class="description">Felipe.</p>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <ul>
-                            <li class="number"></li>
-                            <li class="number">10</li>
-                            <li class="actions">
-                                <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>
-                                <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="left-side">
-                        <div class="icon"></div>
-                        <div class="info">
-                            <a href="#" class="title">Ícaro</a>
-                            <p class="description">de Lima.</p>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <ul>
-                            <li class="number"></li>
-                            <li class="number">20</li>
-                            <li class="actions">
-                                <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>
-                                <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="left-side">
-                        <div class="icon"></div>
-                        <div class="info">
-                            <a href="#" class="title">Daniel</a>
-                            <p class="description">Filho.</p>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <ul>
-                            <li class="number"></li>
-                            <li class="number">30</li>
-                            <li class="actions">
-                                <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>
-                                <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="left-side">
-                        <div class="icon"></div>
-                        <div class="info">
-                            <a href="#" class="title">Lucas</a>
-                            <p class="description">Noleto.</p>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <ul>
-                            <li class="number"></li>
-                            <li class="number">30</li>
-                            <li class="actions">
-                                <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>
-                                <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="left-side">
-                        <div class="icon"></div>
-                        <div class="info">
-                            <a href="#" class="title">Milton</a>
-                            <p class="description">Miranda.</p>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <ul>
-                            <li class="number"></li>
-                            <li class="number">30</li>
-                            <li class="actions">
-                                <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>
-                                <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
             </div>
+            <!-- <div id="backdrop"> -->
+                <div class="modal" id="user-modal">
+                    <div class="header" id="header-name"></div>
+                    <div class="user-info" id="user-info">
+                        <p>STATUS: <span id="status" class="status"></span></p>
+                        <p>Username: <span id="username"></span></p>
+                        <p>Email: <span id="email"></span></p>
+                        <p>Entrou: <span id="createdAt"></span></p>
+                        <p>Número de posts: <span id="posts"></span></p>
+                    </div>
+                    <div class="actions" id="modal-buttons">
+                        <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário" title="Suspender usuário"></a>
+                        <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário" title="Remover usuário"></a>
+                        <a href="#" onclick="hideModal()" class="close">Fechar</a>
+                    </div>
+                </div>
+            <!-- </div> -->
         </section>
     </div>
     <script src="/web/assets/js/main.js"></script>

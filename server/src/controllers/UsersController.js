@@ -1,3 +1,5 @@
+const fs = require('fs');
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 class UsersController {
@@ -26,6 +28,30 @@ class UsersController {
                 response.status(200).send(user);
             } else {
                 response.status(404).json({ message: 'User not found' });
+            }
+        } catch (error) {
+            response.status(500).json({ message: error.message });
+        }
+    }
+
+    async create (request, response) {
+        try {
+            const body = request.body;
+            let user = await User.findOne({ username: body.username });
+
+            if (user) {
+                response.status(409).json({ message: 'Username already exists' });
+            } else {
+                if (request.file) {
+                    const img = fs.readFileSync(request.file.path).toString('base64');
+                    body.image = Buffer.from(img, 'base64');
+                    body.imagetype = request.file.mimetype;
+                }
+                body.password = bcrypt.hashSync(body.password, 10);
+                user = new User(body);
+                await user.save();
+
+                response.status(200).json({ message: 'OK' });
             }
         } catch (error) {
             response.status(500).json({ message: error.message });

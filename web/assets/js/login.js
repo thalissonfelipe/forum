@@ -41,7 +41,7 @@ function handleLogin() {
                 body: JSON.stringify({ username, password })
             };
 
-            fetch('/users/login', options)
+            fetch('/login', options)
                 .then((response) => {
                     statusCode = response.status;
                     return response.json();

@@ -6,8 +6,32 @@ class CategoriesController {
     async index (request, response) {
         try {
             const categories = await Category.find({});
+            const body = [];
 
-            response.status(200).send(categories);
+            for (let i = 0; i < categories.length; i++) {
+                const lastPostId = categories[i].topics.pop();
+                let lastPost = null;
+                if (lastPostId) {
+                    const { title, userId, createdAt, _id } = await Post.findById(lastPostId);
+                    const user = await User.findById(userId);
+                    lastPost = {
+                        title,
+                        author: user.name ? user.name : 'Admin',
+                        createdAt,
+                        id: _id
+                    };
+                }
+
+                body.push({
+                    title: categories[i].title,
+                    description: categories[i].description,
+                    topics: categories[i].topics,
+                    comments: categories[i].comments,
+                    lastPost
+                });
+            }
+
+            response.status(200).send(body);
         } catch (error) {
             response.status(500).json({ message: error.message });
         }

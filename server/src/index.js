@@ -49,13 +49,8 @@ app.get('/', (req, res) => {
     }
 });
 
-// HANDLER PARA TODAS AS ROTAS NÃO TRATADAS --> deve ser última rota a  ser tratada
-app.all('*', (req,res) => {
- 
-   // return res.sendFile('not_found.html', { root: path.join(__dirname, '../../web/public/') });
-   res.status(404);
-   return res.redirect('/web/public/not_found.html');
+app.all('/*', (req, res, nex) => {
+    return res.status(404).sendFile('not_found.html', { root: path.join(__dirname, '../../web/public/') });
 });
-
 
 app.listen(config.getAPIPort(), config.getAPIAddress());

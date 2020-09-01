@@ -13,6 +13,10 @@ const CategorySchema = new mongoose.Schema({
     },
     topics: {
         type: [mongoose.Schema.ObjectId]
+    },
+    comments: {
+        type: Number,
+        default: 0
     }
 });
 

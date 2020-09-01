@@ -18,7 +18,7 @@ O Layout da aplicação foi definido utilizando o display grid e o display flexb
 
 ## TODO
 
-- [ ]  Adicionar função para diminuir/aumentar o tamanho da fonte;
+- [x] Adicionar função para diminuir/aumentar o tamanho da fonte;
 - [x] Realizar chamadas no backend para popular os dados dinamicamente;
 - [ ] Adicionar media queries para dá suporte a outras resoluções;
 - [ ] Adicionar status do usuário na tela de gerenciamento;
