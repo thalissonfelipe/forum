@@ -251,5 +251,6 @@
     margin: 1rem 0;
     color: var(--text);
     border-radius: 0.5rem;
+    border: 0.15rem solid var(--main);
     font-size: calc(1.6rem * var(--font-size));
 }

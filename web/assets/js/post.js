@@ -43,6 +43,7 @@ function filterComments({ post, comments }) {
 
 function fillPost({ post, comments }) {
     const container = document.querySelector('.main-content');
+    document.querySelector('.loader').style.display = 'none';
     container.innerHTML = '';
 
     let author = post.user.profile === 'admin' ? 'Admin' : post.user.name.split(' ')[0];

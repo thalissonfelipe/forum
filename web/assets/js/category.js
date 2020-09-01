@@ -30,6 +30,7 @@ function getCategory() {
 
 function fillCategory(category) {
     let container = document.querySelector('.main-content');
+    document.querySelector('.loader').style.display = 'none';
 
     container.insertAdjacentHTML('beforeend',
         '<div class="path category">' +

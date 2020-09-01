@@ -34,6 +34,7 @@ function getUsers() {
 
 function fillUsers(users) {
     const container = document.querySelector('.grid.main-categories');
+    document.querySelector('.loader').style.display = 'none';
 
     users.map(user => {
         if (user.profile === 'common') {

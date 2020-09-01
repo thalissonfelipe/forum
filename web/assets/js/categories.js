@@ -26,6 +26,7 @@ function getCategories() {
 
 function fillCategories(categories) {
     const container = document.querySelector('.grid.main-categories');
+    document.querySelector('.loader').style.display = 'none';
 
     categories.map(category => {
         let lastPost = category.lastPost ?

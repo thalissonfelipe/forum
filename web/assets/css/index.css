@@ -531,7 +531,6 @@ input:checked + .slider:before {
     color: var(--text);
     border-radius: 1rem;
     font-size: calc(1.7rem * var(--font-size));
-
 }
 .features{
     margin: 6rem 0;
