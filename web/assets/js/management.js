@@ -38,12 +38,13 @@ function fillUsers(users) {
 
     users.map(user => {
         if (user.profile === 'common') {
+            console.log(user.name, user._id)
             container.insertAdjacentHTML('beforeend',
                 '<div class="row">' +
                     '<div class="left-side">' +
                         '<img class="icon" src="' + getAvatarSrc(user.image, user.imagetype) + '" />' +
                         '<div class="info">' +
-                            '<a href="#" class="title" registry=' + user.registry + ' onclick="getUser(this)">' + user.name + '</a>' +
+                            '<a href="#" class="title" registry="' + user.registry + '" onclick="getUser(this)">' + user.name + '</a>' +
                             '<p class="description">' + user.course + '</p>' +
                         '</div>' +
                     '</div>' +
@@ -52,8 +53,9 @@ function fillUsers(users) {
                             '<li></li>' +
                             '<li class="number">' + user.posts + '</li>' +
                             '<li class="actions">' +
-                                '<a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário"></a>' +
-                                '<a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário"></a>' +
+                                '<a id="' + user._id + '" onclick="modifyUser(\'suspended\', this)" href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário" title="Suspender usuário"></a>' +
+                                '<a id="' + user._id + '" onclick="modifyUser(\'banned\', this)" href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário" title="Banir usuário"></a>' +
+                                '<a id="' + user._id + '" onclick="modifyUser(\'active\', this)" href="#"><img src="/web/assets/img/success.png" alt="Ativar usuário" title="Ativar usuário"></a>' +
                             '</li>' +
                         '</ul>' +
                     '</div>' +
@@ -88,8 +90,16 @@ function getUser(anchor) {
 }
 
 function showModal(user) {
+    const status = {
+        'active': 'ATIVO',
+        'suspended': 'SUSPENSO',
+        'banned': 'BANIDO'
+    };
+
     document.getElementById('header-name').innerHTML = user.name;
-    document.getElementById('status').innerHTML = 'ativo'.toUpperCase(); // TODO
+    document.getElementById('header-name').setAttribute('data-id', user._id);
+    document.getElementById('status').innerHTML = status[user.status];
+    document.getElementById('status').classList.add('user-' + Object.keys(status).find(k=>status[k]===status[user.status]));
     document.getElementById('username').innerHTML = user.username;
     document.getElementById('email').innerHTML = user.email;
     document.getElementById('createdAt').innerHTML = formatDatetime(user.created_at);
@@ -99,4 +109,27 @@ function showModal(user) {
 
 function hideModal() {
     document.getElementById('user-modal').style.display = 'none';
+    document.getElementById('status').className = '';
+}
+
+function modifyUser(status, anchor=null) {
+    const id = !anchor ? document.getElementById('header-name').getAttribute('data-id') : anchor.getAttribute('id');
+    const options = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ status, id })
+    };
+
+    fetch('/users', options).then((response) => {
+        if (response.status === 200) {
+            const message = status === 'active' ? 'Usuário ativo.' : status === 'suspended' ? 'Usuário suspenso.' : 'Usuário banido.';
+            showResponseModal(message);
+        } else {
+            showResponseModal('Erro interno.');
+        }
+        !anchor && hideModal();
+    });
 }

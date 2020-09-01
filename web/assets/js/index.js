@@ -175,6 +175,8 @@ function fillHome({ categories, posts }) {
             'TÓPICO' +
         '</a>'
     );
+
+    handleTopicButton();
 }
 
 function addNewPost() {

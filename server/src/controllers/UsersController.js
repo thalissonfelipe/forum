@@ -96,6 +96,31 @@ class UsersController {
             response.status(500).json({ message: error.message });
         }
     }
+
+    async modify (request, response) {
+        try {
+            const admin = await User.findById(request.userid);
+
+            if (admin.profile === 'admin') {
+                const { id, status } = request.body;
+
+                if (!['active', 'suspended', 'banned'].includes(status)) {
+                    return response.status(400).json({ message: 'Invalid status' });
+                }
+
+                await User.findByIdAndUpdate(id, {
+                    $set: {
+                        status
+                    }
+                });
+                response.status(200).json({ message: 'OK' });
+            } else {
+                response.status(403).json({ message: 'Not allowed' });
+            }
+        } catch (error) {
+            response.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = UsersController;

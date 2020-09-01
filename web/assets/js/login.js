@@ -50,9 +50,12 @@ function handleLogin() {
                     if (statusCode === 200) {
                         localStorage.setItem('profile', responseJSON.profile);
                         localStorage.setItem('registry', responseJSON.registry);
+                        localStorage.setItem('status', responseJSON.status);
                         location.href = '/web/public/index.html';
                     } else if (statusCode === 401) {
                         showWarningMessage('div-password', 'Usuário ou senha inválidos.', false);
+                    } else if (statusCode === 403) {
+                        showWarningMessage('div-password', 'Você não tem permissão para fazer login porque você esstá banido do fórum.', false);
                     } else {
                         showWarningMessage('div-password', 'Erro no servidor. Tente novamente mais tarde.', false);
                     }

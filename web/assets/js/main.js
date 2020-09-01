@@ -24,15 +24,6 @@ document.onreadystatechange = function() {
 };
 
 window.onload = function() {
-    const addTopic = document.querySelector('.new-topic-container');
-
-    if (addTopic) {
-        if (!localStorage.getItem('profile')) {
-            replyButton.href = '/web/public/login.html';
-            return;
-        }
-    }
-
     handleTheme();
     handleLogout();
     handleFontSize();
@@ -73,12 +64,24 @@ function replyPost() {
     });
 }
 
+function handleTopicButton() {
+    document.querySelector('.new-topic-container').addEventListener('click', () => {
+        if (!localStorage.getItem('profile')) {
+            location.href = '/web/public/login.html';
+            return;
+        } else if (localStorage.getItem('status') !== 'active') {
+            addTopic.style.pointerEvents = 'none';
+        }
+    });
+}
+
 function handleLogout() {
     const logout = document.querySelector('#logout-item');
 
     if (logout) {
         logout.addEventListener('click', function() {
             localStorage.removeItem('profile');
+            localStorage.removeItem('status');
         });
     }
 }
@@ -180,14 +183,18 @@ function increaseFontSize() {
     const root = document.documentElement;
     let size = Number(root.style.getPropertyValue('--font-size'));
     if (!size)  size = 1;
-    root.style.setProperty('--font-size', size + 0.1);
+    size += 0.07;
+    if (size > 1.3) size = 1.3; 
+    root.style.setProperty('--font-size', size);
 }
 
 function decreaseFontSize() {
     const root = document.documentElement;
     let size = Number(root.style.getPropertyValue('--font-size'));
     if (!size) size = 1;
-    root.style.setProperty('--font-size', size - 0.1);
+    size -= 0.07;
+    if (size < 0.8) size = 0.8;
+    root.style.setProperty('--font-size', size);
 }
 
 function normalizeFontSize() {
@@ -211,4 +218,17 @@ function redirectPage() {
         location.href = '/web/public/index.html';
     }
     return;
+}
+
+function showResponseModal(message) {
+    document.getElementById('response-modal').style.display = 'flex';
+    document.getElementById('response-modal-message').innerHTML = message;
+
+    setTimeout(function() {
+        document.getElementById('response-modal').style.display = 'none';
+    }, 3000);
+}
+
+function hideResponseModal() {
+    document.getElementById('response-modal').style.display = 'none';
 }

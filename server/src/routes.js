@@ -20,6 +20,7 @@ routes.get('/users', middlewares, usersController.index);
 routes.get('/users/:registry', middlewares, usersController.show);
 routes.post('/users', multer(multerConfig).single('file'), usersController.create);
 routes.put('/users/:registry', usersController.update);
+routes.patch('/users', middlewares, usersController.modify);
 routes.delete('/users/:registry', middlewares, usersController.destroy);
 
 // Authentication routes

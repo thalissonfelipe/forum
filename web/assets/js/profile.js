@@ -35,12 +35,15 @@ function fillProfile(user) {
     document.querySelector('input#phone').value = user.phone;
     document.querySelector('input#course').value = user.course;
     document.querySelector('input#semester').value = user.semester;
+
+    if (localStorage.getItem('status') !== 'active') {
+        document.querySelector('input#update').style.pointerEvents = 'none';
+        document.querySelector('input#reset-password-button').style.pointerEvents = 'none';
+    }
 }
 
 function handleUpdateInfo() {
-    const updateButton = document.querySelector('input#update');
-
-    updateButton.addEventListener('click', function(event) {
+    document.querySelector('input#update').addEventListener('click', function(event) {
         event.preventDefault();
 
         const name = document.querySelector('input#name').value;
@@ -72,8 +75,9 @@ function handleUpdateInfo() {
         fetch(`/users/${registry}`, options)
             .then((response) => {
                 if (response.status === 200) {
-                    alert('OK!'); // Criar modal de confirmação!
-                    getUser();
+                    showWarningMessage('div-message-response', 'Informações atualizadas com sucesso.');
+                } else if (response.status === 401) {
+                    showWarningMessage('div-message-response', 'Erro interno.');
                 }
             });
     });

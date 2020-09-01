@@ -66,11 +66,11 @@ function handleChangePassword() {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ password })
+            body: JSON.stringify({ password, registry: document.querySelector('input#registry').value })
         };
 
         let token = getQueryParameter('token');
-        token = token ? token : '';
+        token = token ? token : 'token';
 
         fetch(`/reset/${token}`, options)
             .then((response) => {

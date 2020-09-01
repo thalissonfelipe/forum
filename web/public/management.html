@@ -64,12 +64,17 @@
                         <p>Número de posts: <span id="posts"></span></p>
                     </div>
                     <div class="actions" id="modal-buttons">
-                        <a href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário" title="Suspender usuário"></a>
-                        <a href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário" title="Remover usuário"></a>
+                        <a onclick="modifyUser('suspended', null)" href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário" title="Suspender usuário" /></a>
+                        <a onclick="modifyUser('banned', null)" href="#"><img src="/web/assets/img/danger.png" alt="Banir usuário" title="Banir usuário" /></a>
+                        <a onclick="modifyUser('active', null)" href="#"><img src="/web/assets/img/success.png" alt="Ativar usuário" title="Ativar usuário" /></a>
                         <a href="#" onclick="hideModal()" class="close">Fechar</a>
                     </div>
                 </div>
             <!-- </div> -->
+            <div class="response-modal" id="response-modal">
+                <span id="response-modal-message">Usuário suspenso.</span>
+                <button onclick="hideResponseModal()" id="response-modal-button">Fechar</button>
+            </div>
         </section>
     </div>
     <script src="/web/assets/js/main.js"></script>

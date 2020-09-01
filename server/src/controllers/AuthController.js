@@ -20,12 +20,21 @@ class AuthController {
                 return response.status(401).json({ message: 'Invalid password' });
             }
 
+            if (user.status === 'banned') {
+                return response.status(403).json({ message: 'Not allowed' });
+            }
+
             const token = jwt.sign({ id: user._id }, config.getJwtSecret(), {
                 expiresIn: config.getJwtExpires()
             });
 
             response.cookie('jwt', token, { httpOnly: true });
-            return response.status(200).json({ token, profile: user.profile, registry: user.registry });
+            return response.status(200).json({
+                token,
+                profile: user.profile,
+                registry: user.registry,
+                status: user.status
+            });
         } catch (error) {
             return response.status(500).json({ message: error.message });
         }
@@ -95,7 +104,7 @@ class AuthController {
     async resetPassword (request, response) {
         try {
             let user;
-            if (request.params.token) {
+            if (request.params.token !== 'token') {
                 user = await User.findOne({
                     resetPasswordToken: request.params.token,
                     resetPasswordExpires: { $gt: Date.now() }
@@ -104,8 +113,8 @@ class AuthController {
                 if (!user) {
                     return response.status(401).send({ message: 'Token expired' });
                 }
-            } else if (request.userid) {
-                user = await User.findById(request.userid);
+            } else {
+                user = await User.findOne({ registry: request.body.registry });
             }
 
             user.password = bcrypt.hashSync(request.body.password, 10);

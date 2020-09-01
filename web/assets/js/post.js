@@ -92,6 +92,10 @@ function fillPost({ post, comments }) {
         '</div>'
     );
 
+    if (localStorage.getItem('status') !== 'active') {
+        document.querySelector('#reply-top').style.pointerEvents = 'none';
+    }
+
     comments.map(comment => {
         author = comment.user.profile === 'admin' ? 'Admin' : comment.user.name.split(' ')[0];
         spanPosts = comment.user.profile === 'admin' ? '' : '<p class="posts">Total de posts: <span>' + comment.user.posts + '</span></p>';

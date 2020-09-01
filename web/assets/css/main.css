@@ -269,6 +269,36 @@ input:focus::placeholder {
     /* opacity: 0; */
 }
 
+.response-modal {
+    background-color: var(--white);
+    width: 30rem;
+    height: 20rem;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#response-modal-message {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+#response-modal-button {
+    padding: 1rem 4rem;
+    border: none;
+    cursor: pointer;
+    background: var(--secondary);
+    color: var(--white);
+    outline: none;
+}
+
 .modal {
     background-color: var(--white);
     width: 50rem;
@@ -292,6 +322,18 @@ input:focus::placeholder {
     font-size: 2rem;
 }
 
+.user-active {
+    color: green;
+}
+
+.user-suspended {
+    color: orangered
+}
+
+.user-banned {
+    color: red;
+}
+
 .modal .user-info {
     display: flex;
     flex-direction: column;
@@ -306,7 +348,6 @@ input:focus::placeholder {
 
 .modal .user-info p:first-child {
     text-transform: uppercase;
-    color: green;
     margin-bottom: 2rem;
 }
 

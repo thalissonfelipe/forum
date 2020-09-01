@@ -65,6 +65,10 @@ const UserSchema = new mongoose.Schema({
     imagetype: {
         type: String,
         default: undefined
+    },
+    status: {
+        type: String,
+        default: 'active'
     }
 });
 
