@@ -114,13 +114,13 @@ function showWarningMessage(id, message, changeInputColor=false, isInputGroup=fa
     // TODO: mudar cor do texto e da borda
     const div = document.querySelector('#' + id);
     const span = div.children[1];
-
+    
     // if (!isInputGroup) {
     //     const input = div.previousElementSibling.children[0];
     // } else {
     //     const input = div; // TODO
     // }
-
+    
     div.style.visibility = 'visible';
     span.innerHTML = message;
 }
@@ -128,11 +128,11 @@ function showWarningMessage(id, message, changeInputColor=false, isInputGroup=fa
 function hideWarningMessage(id) {
     const div = document.querySelector('#' + id);
     const span = div.children[1];
-    const input = div.previousElementSibling.children[0];
+    //const input = div.previousElementSibling.children[0];
 
     div.style.visibility = 'hidden';
     span.innerHTML = '';
-    input.style.borderBottomColor = 'var(--text)';
+   // input.style.borderBottomColor = 'var(--text)';
 }
 
 function getQueryParameter(variable) {
