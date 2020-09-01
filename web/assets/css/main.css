@@ -174,6 +174,33 @@ input:focus::placeholder {
     background-color: var(--primary);
 }
 
+.input-container input[type="file"]{
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+}
+
+.input-container input[type="file"] + label {
+    font-size: calc(1.6rem * var(--font-size));
+    font-weight: 700;
+    color: white;
+    background-color: #ffa1dc;
+    display: inline-block;
+    margin-left: 31px;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.input-container input[type="file"]:focus + label,
+.input-container input[type="file"] + label:hover {
+    background-color: var(--secondary);
+    cursor: pointer;
+}
+
+
 .form a {
     text-decoration: none;
     font-size: calc(1.6rem * var(--font-size));
@@ -254,6 +281,18 @@ input:focus::placeholder {
 
 .div-message-error span {
     font-size: calc(1.3rem * var(--font-size));
+}
+
+#div-input-group{
+    display: flex;
+}
+#div-input-group-1{
+    flex-basis: auto;
+    width: 50%;
+}
+#div-input-group-2{
+    flex-basis: auto;
+    width: 50%;
 }
 
 /* TODO: Fechar modal ao clicar fora */

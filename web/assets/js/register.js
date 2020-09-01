@@ -17,22 +17,22 @@ function handleRegister() {
         const course = document.querySelector('input#course').value;
         const semester = document.querySelector('input#semester').value;
 
-        if (name === '') {
+        if (name === '' || !(/^[A-Z a-z]{3,50}$/.test(name)) ) {  //name !== /^[A-Z a-z]{3,50}$/
             showWarningMessage('div-name', 'Nome inválido.', true);
-        } else if (username === '') {
-            showWarningMessage('div-username', 'Usuário inválido.', true);
-        } else if (password === '') {
-            showWarningMessage('div-password', 'Senha inválida.', true);
-        } else if (email === '') {
+        } if (username === '' || !(/^[a-z0-9_-]{3,20}$/.test(username)) ) {
+            showWarningMessage('div-username', 'Usuário inválido. Usuário deve conter letras, números ou caracteres - ou _', true);
+        } if (password === '' || !(/.{8,}/.test(password))  ) {
+            showWarningMessage('div-password', 'Senha inválida. Senha deve ter mais de 8 caracteres', true);
+        } if (email === '' ||  !(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) ) {
             showWarningMessage('div-email', 'Email inválido.', true);
-        } else if (registry === '') {
+        } if (registry === '' || !( /[0-9]{6}/.test(registry)) ) {
             showWarningMessage('div-registry', 'Matrícula inválida.', true);
-        } else if (phone === '') {
-            showWarningMessage('div-phone', 'Telefone inválido.', true);
-        } else if (course  === '') {
-            showWarningMessage('div-course', 'Curso inválido.', true, true);
-        } else if (semester === '') {
-            showWarningMessage('div-semester', 'Semestre inválido.', true);
+        } if (phone === '' || !(/[0-9]{11}/.test(phone)) ) {
+            showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone', true);
+        } if (course  === '' || !(/^[A-Za-z]{3,30}$/.test(course)) ) {
+            showWarningMessage('div-input-group-1', 'Curso inválido.', true, true);
+        } if (semester === '' || !(/[0-9]/.test(semester)) || ( semester > 20 || semester < 1  ) ) {
+            showWarningMessage('div-input-group-2', 'Semestre inválido.', true,true);
         } else {
             let statusCode;
             const options = {
