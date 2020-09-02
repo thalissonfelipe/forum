@@ -48,32 +48,60 @@
                 <form>
                     <div class="vertical-line"></div>
                     <div class="input-container">
-                        <input type="text" name="name" id="name" placeholder="Nome Completo" autocomplete="off" required />
+                        <input type="text" name="name" id="name" placeholder="Nome Completo" oninput="hideWarningMessage('div-name')" autocomplete="off" required />
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </div>
+                    <div id="div-name" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                     <div class="input-container">
-                        <input type="text" name="username" id="username" placeholder="Usuário" autocomplete="off" required />
+                        <input type="text" name="username" id="username" placeholder="Usuário" oninput="hideWarningMessage('div-username')" autocomplete="off" required />
                         <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </div>
+                    <div id="div-username" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                     <div class="input-container">
-                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required />
+                        <input type="email" name="email" id="email" oninput="hideWarningMessage('div-email')" placeholder="Email" autocomplete="off" required />
                         <i class="fa fa-envelope" aria-hidden="true"></i>
                     </div>
+                    <div id="div-email" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                     <div class="input-container">
-                        <input type="text" name="registry" id="registry" placeholder="Matrícula" readonly autocomplete="off" required />
+                        <input type="text" name="registry" id="registry" oninput="hideWarningMessage('div-registry')" placeholder="Matrícula" readonly autocomplete="off" required />
                         <i class="fa fa-id-card-o" aria-hidden="true"></i>
                     </div>
+                    <div id="div-registry" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
                     <div class="input-container">
-                        <input type="tel" name="phone" id="phone" placeholder="Telefone" autocomplete="off" required />
+                        <input type="tel" name="phone" id="phone" oninput="hideWarningMessage('div-phone')" placeholder="Telefone" autocomplete="off" required />
                         <i class="fa fa-phone" aria-hidden="true"></i>
                     </div>
-                    <div class="input-container">
-                        <input type="text" name="course" id="course" placeholder="Curso" autocomplete="off" required />
-                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    <div id="div-phone" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
                     </div>
                     <div class="input-container">
-                        <input type="text" name="semester" id="semester" placeholder="Semestre" autocomplete="off" required />
+                        <input type="text" name="course" id="course" placeholder="Curso" oninput="hideWarningMessage('div-course')" autocomplete="off" required />
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    </div>
+                    <div id="div-course" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" name="semester" id="semester" oninput="hideWarningMessage('div-semester')" placeholder="Semestre" autocomplete="off" required />
                         <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                    <div id="div-semester" class="div-message-error">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                        <span></span>
                     </div>
                     <div id="div-message-response" class="div-message-error">
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
