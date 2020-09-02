@@ -536,7 +536,7 @@ input:checked + .slider:before {
     margin: 6rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(25rem,1fr));
-    gap: 6rem;
+    gap: 9rem;
     align-items: start;
 }
 .feature{
