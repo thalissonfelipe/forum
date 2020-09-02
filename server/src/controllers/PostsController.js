@@ -82,11 +82,11 @@ class PostsController {
         try {
             await Post.findByIdAndDelete(request.params.id);
             await User.findByIdAndUpdate(request.userid, { $inc: { posts: -1 } });
+            const deletedCount = (await Comment.deleteMany({ postId: request.params.id })).deletedCount;
 
             const categories = await Category.find({});
             let postId = null;
             let categoryName;
-
             for (let i = 0; i < categories.length; i++) {
                 postId = categories[i].topics.find(topicId => topicId && topicId.toString() === request.params.id);
 
@@ -95,8 +95,8 @@ class PostsController {
                     break;
                 };
             }
-
             const category = await Category.findOne({ title: categoryName });
+            category.comments -= deletedCount;
             category.topics = category.topics.filter(topicId => topicId.toString() !== postId.toString());
             await category.save();
 

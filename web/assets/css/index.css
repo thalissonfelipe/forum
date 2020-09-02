@@ -450,10 +450,13 @@ input:checked + .slider:before {
     border-top: #ffa1dc 0.02rem solid;
 }
 
-.trending .new-topic-container {
+.trending #cursor-disabled {
     position: fixed;
-    background-color: var(--secondary);
     top: 70rem;
+}
+
+.trending .new-topic-container {
+    background-color: var(--secondary);
     width: 15rem;
     height: 5rem;
     border-radius: 4rem;

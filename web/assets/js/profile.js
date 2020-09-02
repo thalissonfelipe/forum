@@ -4,8 +4,7 @@ window.addEventListener('load', function() {
     handleUpdateInfo();
 });
 
-function getUser() {
-    let statusCode;
+async function getUser() {
     const registry = localStorage.getItem('registry');
     const options = {
         method: 'GET',
@@ -15,16 +14,13 @@ function getUser() {
         }
     };
 
-    fetch(`/users/${registry}`, options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                fillProfile(responseJSON);
-            }
-        });
+    const response = await fetch(`/users/${registry}`, options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        fillProfile(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 }
 
 function fillProfile(user) {
@@ -37,13 +33,15 @@ function fillProfile(user) {
     document.querySelector('input#semester').value = user.semester;
 
     if (localStorage.getItem('status') !== 'active') {
-        document.querySelector('input#update').style.pointerEvents = 'none';
-        document.querySelector('input#reset-password-button').style.pointerEvents = 'none';
+        document.querySelectorAll('.button-container').forEach(button => {
+            button.style.pointerEvents = 'none';
+            button.parentElement.style.cursor = 'not-allowed';
+        });
     }
 }
 
 function handleUpdateInfo() {
-    document.querySelector('input#update').addEventListener('click', function(event) {
+    document.querySelector('input#update').addEventListener('click', async (event) => {
         event.preventDefault();
 
         var errors = 0;
@@ -77,35 +75,24 @@ function handleUpdateInfo() {
             showWarningMessage('div-semester', 'Semestre inválido.', true,true);
             errors++;
         }
-        else if(errors == 0){
-
-
-            const body = {
-                name,
-                username,
-                email,
-                phone,
-                course,
-                semester
-            };
-
+        else if (errors === 0){
             const options = {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify({ name, username, email, phone, course, semester })
             };
 
-            fetch(`/users/${registry}`, options)
-                .then((response) => {
-                    if (response.status === 200) {
-                        showWarningMessage('div-message-response', 'Informações atualizadas com sucesso.');
-                    } else if (response.status === 401) {
-                        showWarningMessage('div-message-response', 'Erro interno.');
-                    }
-                });
+            const response = await fetch(`/users/${registry}`, options);
+            if (response.status === 200) {
+                showWarningMessage('div-message-response', 'Informações atualizadas com sucesso.');
+            } else if (response.status === 401) {
+                document.getElementById('logout-item').dispatchEvent(new Event('click'));
+            } else {
+                showWarningMessage('div-message-response', 'Erro interno.');
+            }
         }
     });
 }

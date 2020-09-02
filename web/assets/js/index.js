@@ -3,6 +3,7 @@ window.addEventListener('load', function() {
 });
 
 async function getData() {
+    const data = {};
     const options = {
         method: 'GET',
         headers: {
@@ -10,12 +11,20 @@ async function getData() {
             'Accept': 'application/json'
         }
     };
-    const data = {};
-
+    
     const categories = await fetch('/categories', options);
+    if (categories.status === 200) {
+        data.categories = await categories.json();
+    } else if (categories.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
+
     const posts = await fetch('/posts', options);
-    data.categories = await categories.json();
-    data.posts = await posts.json();
+    if (posts.status === 200) {
+        data.posts = await posts.json();
+    } else if (posts.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 
     fillHome(data);
 }
@@ -157,11 +166,12 @@ function fillHome({ categories, posts }) {
 
     // Posts mais visitados
     mostVisitedPosts.map(post => {
+        let author = post.profile === 'admin' ? 'Admin' : post.author.split(' ')[0];
         container.insertAdjacentHTML('beforeend',
             '<div class = "trending__item">' +
                 '<a href="/web/public/post.html?category=' + post.category + '&id=' + post._id  + '" class="title">' + post.title + '</a>' +
                 '<p class = "trending-info">' + post.body + '</p>' +
-                '<p>by <span>' + post.author.split(' ')[0] + '</span></p>' +
+                '<p>by <span>' + author + '</span></p>' +
                 '<span class = "trending-date">' + formatDatetime(post.createdAt) + '</span>' +
                 '<hr>' +
             '</div>'
@@ -170,10 +180,12 @@ function fillHome({ categories, posts }) {
 
     container.insertAdjacentHTML('beforeend',
         '</div>' +
-        '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container">' +
-            '<i class="fa fa-plus" aria-hidden="true"></i>' +
-            'TÓPICO' +
-        '</a>'
+        '<span id="cursor-disabled">'+
+            '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container">' +
+                '<i class="fa fa-plus" aria-hidden="true"></i>' +
+                'TÓPICO' +
+            '</a>'+
+        '</span>'
     );
 
     handleTopicButton();
@@ -190,7 +202,7 @@ function addNewPost() {
 
     const button = document.querySelector('#reply-button');
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         const title = document.querySelector('#title-input');
         const body = document.querySelector('#reply-answer');
         const select = document.getElementById('categories-name');
@@ -216,13 +228,13 @@ function addNewPost() {
                 body: JSON.stringify({ title: title.value, body: body.value, category })
             };
 
-            fetch('/posts', options)
-                .then((response) => {
-                    if (response.status === 200) {
-                        replyContainer.style.display = 'none';
-                        getData();
-                    }
-                });
+            const response = await fetch('/posts', options);
+            if (response.status === 200) {
+                replyContainer.style.display = 'none';
+                getData();
+            } else if (response.status === 401) {
+                document.getElementById('logout-item').dispatchEvent(new Event('click'));
+            }
         }
     });
 }

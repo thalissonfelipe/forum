@@ -10,8 +10,7 @@ window.addEventListener('load', function() {
     // });
 });
 
-function getUsers() {
-    let statusCode;
+async function getUsers() {
     const options = {
         method: 'GET',
         headers: {
@@ -20,16 +19,13 @@ function getUsers() {
         }
     };
 
-    fetch('/users', options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                fillUsers(responseJSON);
-            }
-        });
+    const response = await fetch('/users', options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        fillUsers(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 }
 
 function fillUsers(users) {
@@ -38,7 +34,6 @@ function fillUsers(users) {
 
     users.map(user => {
         if (user.profile === 'common') {
-            console.log(user.name, user._id)
             container.insertAdjacentHTML('beforeend',
                 '<div class="row">' +
                     '<div class="left-side">' +
@@ -65,10 +60,8 @@ function fillUsers(users) {
     });
 }
 
-function getUser(anchor) {
+async function getUser(anchor) {
     const registry = anchor.getAttribute('registry');
-    
-    let statusCode;
     const options = {
         method: 'GET',
         headers: {
@@ -77,16 +70,13 @@ function getUser(anchor) {
         }
     };
 
-    fetch(`/users/${registry}`, options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                showModal(responseJSON);
-            }
-        });
+    const response = await fetch(`/users/${registry}`, options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        showModal(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 }
 
 function showModal(user) {
@@ -112,7 +102,7 @@ function hideModal() {
     document.getElementById('status').className = '';
 }
 
-function modifyUser(status, anchor=null) {
+async function modifyUser(status, anchor=null) {
     const id = !anchor ? document.getElementById('header-name').getAttribute('data-id') : anchor.getAttribute('id');
     const options = {
         method: 'PATCH',
@@ -123,13 +113,13 @@ function modifyUser(status, anchor=null) {
         body: JSON.stringify({ status, id })
     };
 
-    fetch('/users', options).then((response) => {
-        if (response.status === 200) {
-            const message = status === 'active' ? 'Usuário ativo.' : status === 'suspended' ? 'Usuário suspenso.' : 'Usuário banido.';
-            showResponseModal(message);
-        } else {
-            showResponseModal('Erro interno.');
-        }
-        !anchor && hideModal();
-    });
+    const response = await fetch('/users', options);
+    if (response.status === 200) {
+        const message = status === 'active' ? 'Usuário ativo.' : status === 'suspended' ? 'Usuário suspenso.' : 'Usuário banido.';
+        showResponseModal(message);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    } else {
+        showResponseModal('Erro interno.');
+    }
 }

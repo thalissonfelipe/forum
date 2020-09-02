@@ -31,9 +31,12 @@
 
 .buttons a {
     text-decoration: none;
+    color: var(--white);
+}
+
+.buttons #cursor-disabled {
     padding: 1rem 3.5rem 1rem 2rem;
     background-color: var(--primary);
-    color: var(--white);
     font-size: calc(1.6rem * var(--font-size));
     border-radius: .4rem;
     position: relative;
@@ -130,22 +133,24 @@
     position: relative;
 }
 
-.container .user-info .buttons {
+.button-icon {
     position: absolute;
-    top: 0;
+    top: 2rem;
     right: 2rem;
-    flex-direction: column;
     display: none;
-}
-
-.container .user-info .buttons.can-update {
-    display: flex;
-}
-
-.container .user-info .buttons a {
     background: none;
     font-size: 2rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.button-icon i {
+    font-size: 2rem;
+    color: var(--text);
+}
+
+.container .user-info .button-icon.can-update {
+    display: block;
 }
 
 .container .user-info .icon {

@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
 function handleForgotPassword() {
     const button = document.getElementById('send-button');
 
-    button && (button.addEventListener('click', (event) => {
+    button && (button.addEventListener('click', async (event) => {
         event.preventDefault();
 
         const email = document.getElementById('email').value;
@@ -16,7 +16,6 @@ function handleForgotPassword() {
             return;
         }
 
-        let statusCode;
         const options = {
             method: 'POST',
             headers: {
@@ -26,27 +25,22 @@ function handleForgotPassword() {
             body: JSON.stringify({ email })
         };
 
-        fetch('/forgot', options)
-            .then((response) => {
-                statusCode = response.status;
-                return response.json();
-            })
-            .then((responseJSON) => {
-                if (statusCode === 200) {
-                    const a = document.getElementById('reset-password-link');
-                    a.style.display = 'block';
-                    a.setAttribute('href', responseJSON.resetPasswordLink);
-                } else if (statusCode === 404) {
-                    showWarningMessage('div-email', 'Email não cadastrado no sistema.');
-                }
-            });
+        const response = await fetch('/forgot', options);
+        if (response.status === 200) {
+            const responseJSON = await response.json();
+            const a = document.getElementById('reset-password-link');
+            a.style.display = 'block';
+            a.setAttribute('href', responseJSON.resetPasswordLink);
+        } else if (statusCode === 404) {
+            showWarningMessage('div-email', 'Email não cadastrado no sistema.');
+        }
     }));
 }
 
 function handleChangePassword() {
     const button = document.getElementById('reset-password-button');
 
-    button && (button.addEventListener('click', (event) => {
+    button && (button.addEventListener('click', async (event) => {
         event.preventDefault();
 
         const password = document.getElementById('password').value;
@@ -69,16 +63,12 @@ function handleChangePassword() {
             body: JSON.stringify({ password, registry: document.querySelector('input#registry').value })
         };
 
-        let token = getQueryParameter('token');
-        token = token ? token : 'token';
-
-        fetch(`/reset/${token}`, options)
-            .then((response) => {
-                if (response.status === 200) {
-                    showWarningMessage('div-repeat-password', 'Senha atualizada com sucesso.');
-                } else if (response.status === 401) {
-                    showWarningMessage('div-repeat-password', 'Prazo expirado. Solicite uma nova requisição para trocar sua senha.');
-                }
-            });
+        const token = getQueryParameter('token') ? getQueryParameter('token') : 'token';
+        const response = await fetch(`/reset/${token}`, options);
+        if (response.status === 200) {
+            showWarningMessage('div-repeat-password', 'Senha atualizada com sucesso.');
+        } else if (response.status === 401) {
+            showWarningMessage('div-repeat-password', 'Prazo expirado. Solicite uma nova requisição para trocar sua senha.');
+        }
     }));
 }

@@ -65,13 +65,16 @@ function replyPost() {
 }
 
 function handleTopicButton() {
-    document.querySelector('.new-topic-container').addEventListener('click', () => {
+    if (localStorage.getItem('status') !== 'active') {
+        document.querySelector('#cursor-disabled').style.cursor = 'not-allowed';
+        document.querySelector('.new-topic-container').style.pointerEvents = 'none';
+    }
+
+    document.querySelector('.new-topic-container').addEventListener('click', (event) => {
         if (!localStorage.getItem('profile')) {
             location.href = '/web/public/login.html';
             return;
-        } else if (localStorage.getItem('status') !== 'active') {
-            addTopic.style.pointerEvents = 'none';
-        }
+        } 
     });
 }
 
@@ -82,6 +85,8 @@ function handleLogout() {
         logout.addEventListener('click', function() {
             localStorage.removeItem('profile');
             localStorage.removeItem('status');
+            localStorage.removeItem('registry');
+            location.href = '/web/public/login.html';
         });
     }
 }

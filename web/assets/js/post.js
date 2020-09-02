@@ -2,8 +2,7 @@ window.addEventListener('load', function() {
     getPost();
 });
 
-function getPost() {
-    let statusCode;
+async function getPost() {
     const options = {
         method: 'GET',
         headers: {
@@ -12,22 +11,15 @@ function getPost() {
         }
     };
 
-    fetch(`/posts/${getQueryParameter('id')}`, options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                fillPost(responseJSON);
-                // const search = document.querySelector('#search');
-                // search.addEventListener('keyup', function() {
-                //     // filterComments(responseJSON);
-                // });
-            } else if (statusCode === 400 || statusCode === 404) {
-                location.href = '/web/public/not_found.html';
-            }
-        });
+    const response = await fetch(`/posts/${getQueryParameter('id')}`, options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        fillPost(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    } else if (response.status === 400 || response.status === 404) {
+        location.href = '/web/public/not_found.html';
+    }
 }
 
 function filterComments({ post, comments }) {
@@ -43,12 +35,11 @@ function filterComments({ post, comments }) {
 
 function fillPost({ post, comments }) {
     const container = document.querySelector('.main-content');
-    document.querySelector('.loader').style.display = 'none';
     container.innerHTML = '';
 
     let author = post.user.profile === 'admin' ? 'Admin' : post.user.name.split(' ')[0];
     let spanPosts = post.user.profile === 'admin' ? '' : '<p class="posts">Total de posts: <span>' + post.user.posts + '</span></p>';
-    let buttonsClass = localStorage.getItem('profile') === 'admin' ? 'buttons can-update' : 'buttons';
+    let iconClass = localStorage.getItem('profile') === 'admin' ? 'button-icon can-update' : 'button-icon';
     let commentsIds = [];
 
     container.insertAdjacentHTML('beforeend',
@@ -65,7 +56,7 @@ function fillPost({ post, comments }) {
             '</div>' +
             '<h1>' + post.title + '</h1>' +
             '<div class="buttons">' +
-                '<a id="reply-top" href="#reply-container" onclick="addComment()">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>' +
+                '<span id="cursor-disabled"><a id="reply-top" href="#reply-container" onclick="addComment()">Responder <i class="fa fa-reply" aria-hidden="true"></i></a></span>' +
                 '<div class="search-container">' +
                     '<input type="text" id="search" autocomplete="off" placeholder="Procure aqui">' +
                     '<i class="fa fa-search" aria-hidden="true"></i>' +
@@ -80,10 +71,7 @@ function fillPost({ post, comments }) {
                 '<p>' + post.body +'</p>' +
             '</div>' +
             '<div class="user-info">' +
-                '<div id="buttons-post" class="' + buttonsClass + '">' +
-                    '<a class="button-icon" id="update-post"><i class="fa fa-pencil" aria-hidden="true"></i></a>' +
-                    '<a class="button-icon" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
-                '</div>' +
+                '<a class="' + iconClass + '" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
                 '<img class="icon" src="' + getAvatarSrc(post.user.userImage, post.user.userImageType) + '" />' +
                 '<span id="userid" data-id=">' + post.user.id + '">' + author + '</span>' +
                 spanPosts +
@@ -93,6 +81,7 @@ function fillPost({ post, comments }) {
     );
 
     if (localStorage.getItem('status') !== 'active') {
+        document.querySelector('#cursor-disabled').style.cursor = 'not-allowed';
         document.querySelector('#reply-top').style.pointerEvents = 'none';
     }
 
@@ -110,10 +99,7 @@ function fillPost({ post, comments }) {
                     '<p>' + comment.body +'</p>' +
                 '</div>' +
                 '<div class="user-info">' +
-                    '<div class="' + buttonsClass + '">' +
-                        '<a class="button-icon"><i class="fa fa-pencil" aria-hidden="true"></i></a>' +
-                        '<a class="button-icon" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="deleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
-                    '</div>' +
+                    '<a class="' + iconClass + '" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="deleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
                     '<img class="icon" src="' + getAvatarSrc(comment.user.userImage, comment.user.userImageType) + '" />' +
                     '<span>' + author + '</span>' +
                     spanPosts +
@@ -134,12 +120,12 @@ function fillPost({ post, comments }) {
             '</div>' +
             '<textarea name="reply-answer" id="reply-answer" placeholder="Deixe sua mensagem aqui"></textarea>' +
             '<div class="buttons">' +
-                '<a id="reply-button">Responder <i class="fa fa-reply" aria-hidden="true"></i></a>' +
+            '<span id="cursor-disabled"><a id="reply-button">Responder <i class="fa fa-reply" aria-hidden="true"></i></a></span>' +
             '</div>' +
         '</div>'
     );
 
-    checkUser(post.user.id, commentsIds);
+    (localStorage.getItem('profile') && localStorage.getItem('profile') !== 'admin') && checkUser(post.user.id, commentsIds);
 }
 
 function addComment() {
@@ -151,30 +137,34 @@ function addComment() {
     const replyContainer = document.querySelector('.reply-container');
     replyContainer.style.display = 'block';
 
-    const button = document.querySelector('#reply-button');
+    document.querySelector('#reply-button').addEventListener('click', async () => {
+        const commentBody = document.querySelector('#reply-answer');
 
-    button.addEventListener('click', () => {
-        const commentBody = document.querySelector('#reply-answer').value;
+        if (commentBody.value === '') {
+            commentBody.focus();
+            return;
+        }
+
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify({ commentBody, postId: getQueryParameter('id'), category: getQueryParameter('category') })
+            body: JSON.stringify({ commentBody: commentBody.value, postId: getQueryParameter('id'), category: getQueryParameter('category') })
         };
 
-        fetch('/comments', options)
-            .then((response) => {
-                if (response.status === 200) {
-                    replyContainer.style.display = 'none';
-                    getPost();
-                }
-            });
+        const response = await fetch('/comments', options);
+        if (response.status === 200) {
+            replyContainer.style.display = 'none';
+            getPost();
+        } else if (response.status === 401) {
+            document.getElementById('logout-item').dispatchEvent(new Event('click'));
+        }
     });
 }
 
-function deleteItem(type, anchor=null) {
+async function deleteItem(type, anchor=null) {
     const url = anchor !== null ? `/${type}/${anchor.getAttribute('commentId')}` : `/${type}/${getQueryParameter('id')}`;
     const options = {
         method: 'DELETE',
@@ -184,19 +174,19 @@ function deleteItem(type, anchor=null) {
         }
     };
 
-    fetch(url, options)
-        .then((response) => {
-            console.log(response)
-            if (response.status === 200) {
-                if (!anchor) {
-                    location.href = `/web/public/category.html?category=${getQueryParameter('category')}`;
-                } else {
-                    getPost();
-                }
-            }
-        });
+    const response = await fetch(url, options);
+    if (response.status === 200) {
+        if (!anchor) {
+            location.href = `/web/public/category.html?category=${getQueryParameter('category')}`;
+        } else {
+            getPost();
+        }
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 }
 
+// Essa função habilita o delete do post/comment se ele for o dono
 async function checkUser(postId, commentsIds) {
     const options = {
         method: 'GET',

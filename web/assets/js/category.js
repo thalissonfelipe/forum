@@ -2,8 +2,8 @@ window.addEventListener('load', function() {
     getCategory();
 });
 
-function getCategory() {
-    let statusCode;
+async function getCategory() {
+    const category = getQueryParameter('category');
     const options = {
         method: 'GET',
         headers: {
@@ -12,20 +12,15 @@ function getCategory() {
         }
     };
 
-    let category = getQueryParameter('category');
-
-    fetch(`/categories/${category}`, options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                fillCategory(responseJSON);
-            } else {
-                location.href = '/web/public/not_found.html';
-            }
-        });
+    const response = await fetch(`/categories/${category}`, options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        fillCategory(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    } else if (response.status === 404) {
+        location.href = '/web/public/not_found.html';
+    }
 }
 
 function fillCategory(category) {
@@ -58,6 +53,7 @@ function fillCategory(category) {
     container = document.querySelector('.grid.last-posts');
 
     category.posts.map(post => {
+        let author = !post.author ? 'Admin' : post.author.split(' ')[0];
         container.insertAdjacentHTML('beforeend',
             '<div class="row">' +
                 '<div class="left-side">' +
@@ -69,7 +65,7 @@ function fillCategory(category) {
                         '<li class="number">' + post.visits + '</li>' +
                         '<li class="number">' + post.comments + '</li>' +
                         '<li class="author">' +
-                            '<a href="#">' + post.author.split(' ')[0] + '</a>' +
+                            '<a href="#">' + author + '</a>' +
                         '</li>' +
                     '</ul>' +
                 '</div>' +

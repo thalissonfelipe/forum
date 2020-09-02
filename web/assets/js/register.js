@@ -3,9 +3,7 @@ window.addEventListener('load', function() {
 });
 
 function handleRegister() {
-    const button = document.querySelector('#register-button');
-
-    button.addEventListener('click', (event) => {
+    document.querySelector('#register-button').addEventListener('click', async (event) => {
         event.preventDefault();
 
         var errors = 0;
@@ -41,10 +39,9 @@ function handleRegister() {
             showWarningMessage('div-input-group-1', 'Curso inválido.', true, true);
             errors++;
         } if (semester === '' || !(/[0-9]/.test(semester)) || ( semester > 20 || semester < 1  ) ) {
-            showWarningMessage('div-input-group-2', 'Semestre inválido.', true,true);
+            showWarningMessage('div-input-group-2', 'Semestre inválido.', true);
             errors++;
-        } else if(errors == 0) {
-            let statusCode;
+        } else if (errors == 0) {
             const options = {
                 method: 'POST',
                 headers: {
@@ -63,18 +60,12 @@ function handleRegister() {
                 })
             };
 
-            fetch('/users', options)
-                .then((response) => {
-                    statusCode = response.status;
-                    return response.json();
-                })
-                .then((responseJSON) => {
-                    if (statusCode === 200) {
-                        localStorage.setItem('profile', responseJSON.profile);
-                        localStorage.setItem('registry', responseJSON.registry);
-                        location.href = '/web/public/login.html';
-                    }
-                });
+            const response = await fetch('/users', options);
+            if (response.status === 200) {
+                location.href = '/web/public/login.html';
+            } else if (response.status === 409) {
+                showWarningMessage('div-input-group-1', 'Username já existe. Por favor, escolha outro', true);
+            }
         }
     });
 }

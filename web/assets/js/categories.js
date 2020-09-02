@@ -2,8 +2,7 @@ window.addEventListener('load', function() {
     getCategories();
 });
 
-function getCategories() {
-    let statusCode;
+async function getCategories() {
     const options = {
         method: 'GET',
         headers: {
@@ -12,16 +11,13 @@ function getCategories() {
         }
     };
 
-    fetch('/categories', options)
-        .then((response) => {
-            statusCode = response.status;
-            return response.json();
-        })
-        .then((responseJSON) => {
-            if (statusCode === 200) {
-                fillCategories(responseJSON);
-            }
-        });
+    const response = await fetch('/categories', options);
+    if (response.status === 200) {
+        const responseJSON = await response.json();
+        fillCategories(responseJSON);
+    } else if (response.status === 401) {
+        document.getElementById('logout-item').dispatchEvent(new Event('click'));
+    }
 }
 
 function fillCategories(categories) {
