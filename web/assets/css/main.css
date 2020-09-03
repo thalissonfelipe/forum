@@ -22,8 +22,8 @@ html {
 }
 
 .light-theme {
-    --primary: #FFA1DC;
-    --secondary: #FF53BF;
+    --primary: #FF53BF;
+    --secondary: #DE038E;
     --header: #EDF3F7;
     --grid-header: #edf3f788;
     --text: #777F85;
@@ -31,7 +31,8 @@ html {
     --main: #FAFAFA;
     --input: #FAFAFA;
     --paragraph: #1D2933;
-    --reply: #CADBE6;
+    --reply: #D9E9F2;
+    --alert: #FF3838;
 }
 
 .dark-theme {
@@ -45,6 +46,7 @@ html {
     --input: #1A2630;
     --paragraph: #FAFAFA;
     --reply: #344654;
+    --alert: #FF8903;
 }
 
 body {
@@ -186,12 +188,12 @@ input:focus::placeholder {
 .input-container input[type="file"] + label {
     font-size: calc(1.6rem * var(--font-size));
     font-weight: 700;
-    color: white;
-    background-color: #ffa1dc;
+    color: var(--main);
+    background-color: var(--primary);
     display: inline-block;
     margin-left: 31px;
     padding: 10px;
-    border-radius: 25px;
+    border-radius: 0.8rem;
 }
 
 .input-container input[type="file"]:focus + label,
@@ -276,11 +278,12 @@ input:focus::placeholder {
 .div-message-error i {
     font-size: calc(1.4rem * var(--font-size));
     margin-right: 0.5rem;
-    color: red;
+    color: var(--alert);
 }
 
 .div-message-error span {
-    font-size: calc(1.3rem * var(--font-size));
+    font-size: calc(1.5rem * var(--font-size));
+    color: var(--alert);
 }
 
 #div-input-group{
@@ -309,16 +312,19 @@ input:focus::placeholder {
 }
 
 .response-modal {
-    background-color: var(--white);
+    background-color: var(--primary);
+    color: var(--main);
     width: 30rem;
-    height: 20rem;
+    height: 15rem;
     position: absolute;
     left: 50%;
     top: 20%;
+    padding-top: 2.5rem;
     transform: translateX(-50%);
+    border-radius: 0.8rem;
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     z-index: 10;
 }
@@ -329,9 +335,17 @@ input:focus::placeholder {
     margin-bottom: 1rem;
 }
 
+#response-modal-title {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
 #response-modal-button {
     padding: 1rem 4rem;
+    width: 100%;
+    height: 4rem;
     border: none;
+    border-radius: 0 0 0.8rem 0.8rem;
     cursor: pointer;
     background: var(--secondary);
     color: var(--white);
@@ -339,7 +353,8 @@ input:focus::placeholder {
 }
 
 .modal {
-    background-color: var(--white);
+    background-color: var(--reply);
+    border-radius: 0.8rem;
     width: 50rem;
     height: 50rem;
     position: absolute;
@@ -348,29 +363,49 @@ input:focus::placeholder {
     transform: translate(-50%, -50%);
     display: none;
     flex-direction: column;
+    box-shadow: 0rem 0.6rem 0.5rem 0.2rem rgba(49, 49, 58, 0.185);
 }
 
 .modal .header {
     background-color: var(--primary);
+    border-radius: 0.8rem 0.8rem 0 0;
     height: 5rem;
     width: 100%;
     text-align: center;
     line-height: 5rem;
     font-weight: bold;
-    color: var(--white);
+    color: var(--main);
     font-size: 2rem;
 }
 
 .user-active {
-    color: green;
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 1rem;
+    border-radius: 0.8rem;
+    background-color: #00E01A;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0rem 0.2rem 0.3rem 0.1rem rgba(49, 49, 58, 0.185);
 }
 
 .user-suspended {
-    color: orangered
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 1rem;
+    border-radius: 0.8rem;
+    background-color: #FF9114;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0rem 0.2rem 0.3rem 0.1rem rgba(49, 49, 58, 0.185);
 }
 
 .user-banned {
-    color: red;
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 1rem;
+    border-radius: 0.8rem;
+    background-color: #FF425B;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0rem 0.2rem 0.3rem 0.1rem rgba(49, 49, 58, 0.185);
 }
 
 .modal .user-info {
@@ -381,7 +416,7 @@ input:focus::placeholder {
 
 .modal .user-info p {
     font-size: 1.6rem;
-    color: var(--text);
+    color: var(--paragraph);
     margin: 0.5rem 0;
 }
 
@@ -414,12 +449,12 @@ input:focus::placeholder {
 }
 
 .loader {
-    border: 1.6rem solid var(--white);
+    border: 1.6rem solid var(--main); 
     border-top: 1.6rem solid var(--secondary);
     border-radius: 50%;
     width: 10rem;
     height: 10rem;
-    animation: spin 2s linear infinite;
+    animation: spin 1s cubic-bezier(0.19, 0.3, 0.4, 0.12) infinite;
     z-index: 10;
     position: absolute;
     top: calc(50% - 6.5rem);
@@ -428,5 +463,5 @@ input:focus::placeholder {
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    100% { transform: rotate(720deg);}
 }

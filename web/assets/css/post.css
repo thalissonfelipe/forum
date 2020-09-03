@@ -224,7 +224,14 @@
 }
 
 .reply-container #reply-button {
-    margin-top: -2rem;
+    margin-top: -3rem;
+    padding: 1rem;
+    font-size: calc(2rem * var(--font-size));
+    resize: none;
+    background-color: var(--primary);
+    border: none;
+    color: var(--main);
+    border-radius: 0.8rem;
 }
 
 .reply-container-home {
@@ -253,11 +260,16 @@
 .reply-container #categories-name {
     outline: none;
     margin: 1rem 0;
+    padding: 1rem;
     color: var(--text);
-    border-radius: 0.5rem;
-    border: 0.15rem solid var(--main);
+    border-radius: 0.8rem;
+    border: none;
     font-size: calc(1.6rem * var(--font-size));
-    padding: 9px;
-    background-color: #ffccec;
-    color: #fff;
+    background-color: var(--primary);
+    color: var(--main);
+}
+
+.reply-container #categories-name option{
+    color: var(--secondary);
+    background-color: var(--main);
 }

@@ -57,11 +57,11 @@
                 <div class="modal" id="user-modal">
                     <div class="header" id="header-name"></div>
                     <div class="user-info" id="user-info">
-                        <p>STATUS: <span id="status" class="status"></span></p>
-                        <p>Username: <span id="username"></span></p>
-                        <p>Email: <span id="email"></span></p>
-                        <p>Entrou: <span id="createdAt"></span></p>
-                        <p>Número de posts: <span id="posts"></span></p>
+                        <p><b>STATUS:</b> <span id="status" class="status"></span></p>
+                        <p><b>Username:</b> <span id="username"></span></p>
+                        <p><b>Email:</b> <span id="email"></span></p>
+                        <p><b>Entrou:</b> <span id="createdAt"></span></p>
+                        <p><b>Número de posts:</b> <span id="posts"></span></p>
                     </div>
                     <div class="actions" id="modal-buttons">
                         <a onclick="modifyUser('suspended', null)" href="#"><img src="/web/assets/img/alert.png" alt="Suspender usuário" title="Suspender usuário" /></a>
@@ -72,6 +72,7 @@
                 </div>
             <!-- </div> -->
             <div class="response-modal" id="response-modal">
+                <span id="response-modal-title">Pronto!</span>
                 <span id="response-modal-message">Usuário suspenso.</span>
                 <button onclick="hideResponseModal()" id="response-modal-button">Fechar</button>
             </div>

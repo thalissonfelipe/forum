@@ -17,7 +17,7 @@ header.menu {
     align-items: center;
     border-top-left-radius: 1.8rem;
     border-top-right-radius: 1.8rem;
-    min-width: 100rem;
+    min-width: 150rem;
 }
 
 header.menu a {
@@ -163,7 +163,7 @@ input:checked + .slider:before {
 
 .main-content {
     min-height: 70rem;
-    min-width: 100rem;
+    min-width: 150rem;
     background-color: var(--main);
     display: grid;
     position: relative;
