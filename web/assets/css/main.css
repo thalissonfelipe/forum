@@ -85,7 +85,7 @@ body {
 } */
 
 .form.register {
-    padding: 5rem 10rem;
+    padding: 3rem 10rem;
 }
 
 .form h1 {
@@ -99,8 +99,7 @@ body {
 }
 
 .form img {
-    width: 16rem;
-    height: 16rem;
+    height: 10rem;
     margin-bottom: 3rem;
 }
 
@@ -284,6 +283,10 @@ input:focus::placeholder {
 .div-message-error span {
     font-size: calc(1.5rem * var(--font-size));
     color: var(--alert);
+}
+
+.success-message {
+    color: green !important;
 }
 
 #div-input-group{

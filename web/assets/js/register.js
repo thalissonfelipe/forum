@@ -8,6 +8,7 @@ function handleRegister() {
 
         var errors = 0;
 
+        const file = document.querySelector('input#photo').files[0];
         const name = document.querySelector('input#name').value;
         const username = document.querySelector('input#username').value;
         const password = document.querySelector('input#password').value;
@@ -21,10 +22,10 @@ function handleRegister() {
             showWarningMessage('div-name', 'Nome inválido.', true);
             errors++;
         } if (username === '' || !(/^[a-z0-9_-]{3,20}$/.test(username)) ) {
-            showWarningMessage('div-username', 'Usuário inválido. Usuário deve conter letras, números ou caracteres - ou _', true);
+            showWarningMessage('div-username', 'Usuário inválido. Usuário deve conter letras, números ou caracteres - ou _.', true);
             errors++;
         } if (password === '' || !(/.{8,}/.test(password))  ) {
-            showWarningMessage('div-password', 'Senha inválida. Senha deve ter mais de 8 caracteres', true);
+            showWarningMessage('div-password', 'Senha inválida. Senha deve ter mais de 8 caracteres.', true);
             errors++;
         } if (email === '' ||  !(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) ) {
             showWarningMessage('div-email', 'Email inválido.', true);
@@ -33,7 +34,7 @@ function handleRegister() {
             showWarningMessage('div-registry', 'Matrícula inválida.', true);
             errors++;
         } if (phone === '' || !(/[0-9]{11}/.test(phone)) ) {
-            showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone', true);
+            showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone.', true);
             errors++;
         } if (course  === '' || !(/^[A-Za-z]{3,30}$/.test(course)) ) {
             showWarningMessage('div-input-group-1', 'Curso inválido.', true, true);
@@ -42,29 +43,24 @@ function handleRegister() {
             showWarningMessage('div-input-group-2', 'Semestre inválido.', true);
             errors++;
         } else if (errors == 0) {
+            const body = { name, username, password, email, registry, phone, course, semester };
+            const formData = new FormData();
+            for (const name in body) {
+                formData.append(name, body[name]);
+            }
+            if (file) formData.append('file', file);
             const options = {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name,
-                    username,
-                    password,
-                    email,
-                    registry,
-                    phone,
-                    course,
-                    semester
-                })
+                body: formData
             };
 
             const response = await fetch('/users', options);
             if (response.status === 200) {
-                location.href = '/web/public/login.html';
+                showWarningMessage('div-success', 'Cadastro realizado com sucesso!', true);
+                document.getElementById('register-form').reset();
             } else if (response.status === 409) {
-                showWarningMessage('div-input-group-1', 'Username já existe. Por favor, escolha outro', true);
+                const responseJSON = await response.json();
+                showWarningMessage('div-input-group-1', responseJSON.message + ' Por favor, escolha outro.', true);
             }
         }
     });

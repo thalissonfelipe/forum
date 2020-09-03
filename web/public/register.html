@@ -13,8 +13,8 @@
     <section class="form-section">
         <div class="form register card">
             <h1>Cadastrar-se</h1>
-            <img src="/web/assets/img/Uniquorum_vt_logo.png" alt="Logo" />
-            <form>
+            <img src="/web/assets/img/Uniquorum_hz_logo.png" alt="Logo" />
+            <form id="register-form">
                 <div class="input-container">
                     <input type="file" name="photo" id="photo" placeholder="Foto de perfil" autocomplete="off" />
                     <label for="photo">Escolha uma foto de perfil</label>
@@ -91,6 +91,10 @@
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         <span></span>
                     </div>
+                </div>
+                <div id = "div-success" class="div-message-error">
+                    <i class="fa fa-check success-message" aria-hidden="true"></i>
+                    <span class="success-message"></span>
                 </div>
                 <div class="input-container">
                     <input id="register-button" type="submit" name="submit" value="Criar conta" />

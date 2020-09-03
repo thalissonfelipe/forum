@@ -61,7 +61,7 @@ function fillHome({ categories, posts }) {
                 '</div>' +
                 '<textarea name="reply-answer" id="reply-answer" class="reply-home" required placeholder="Deixe sua mensagem aqui"></textarea>' +
                 '<div class="buttons">' +
-                    '<a id="reply-button">Postar <i class="fa fa-location-arrow" aria-hidden="true"></i></a>' +
+                    '<span id="cursor-disabled" class="send"><a id="reply-button">Postar <i class="fa fa-location-arrow" aria-hidden="true"></i></a></span>' +
                 '</div>' +
             '</div>' +
 
@@ -72,7 +72,13 @@ function fillHome({ categories, posts }) {
                     '<li>Comentários</li>' +
                     '<li>Last post</li>' +
                 '</ul>' +
-            '</header>'
+            '</header>' +
+
+            '<div class="response-modal" id="response-modal">' +
+                '<span id="response-modal-title">Pronto!</span>' +
+                '<span id="response-modal-message"></span>' +
+                '<button onclick="hideResponseModal()" id="response-modal-button">Fechar</button>' +
+            '</div>'
     );
 
     container = document.querySelector('.grid.main-categories');
@@ -230,6 +236,7 @@ function addNewPost() {
 
             const response = await fetch('/posts', options);
             if (response.status === 200) {
+                showResponseModal(`Novo post adicionado.`);
                 replyContainer.style.display = 'none';
                 getData();
             } else if (response.status === 401) {

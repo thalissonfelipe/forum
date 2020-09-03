@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -19,6 +20,7 @@ mongoose.connect(
     }
 );
 
+app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());

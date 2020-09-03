@@ -258,8 +258,12 @@ input:checked + .slider:before {
     padding: 2rem 0;
     max-height: 7rem;
     border: 0.1rem solid var(--header);
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.5rem;
     min-height: 6rem;
+}
+
+.grid .row:last-child {
+    margin-bottom: 1rem;
 }
 
 .grid .row.categories {

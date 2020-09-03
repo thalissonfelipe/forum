@@ -43,6 +43,10 @@
     cursor: pointer;
 }
 
+.buttons .send {
+    margin-top: -2rem;
+}
+
 .buttons a i {
     position: absolute;
     right: 1rem;
@@ -224,7 +228,6 @@
 }
 
 .reply-container #reply-button {
-    margin-top: -3rem;
     padding: 1rem;
     font-size: calc(2rem * var(--font-size));
     resize: none;

@@ -120,7 +120,7 @@ function fillPost({ post, comments }) {
             '</div>' +
             '<textarea name="reply-answer" id="reply-answer" placeholder="Deixe sua mensagem aqui"></textarea>' +
             '<div class="buttons">' +
-            '<span id="cursor-disabled"><a id="reply-button">Responder <i class="fa fa-reply" aria-hidden="true"></i></a></span>' +
+            '<span id="cursor-disabled" class="send"><a id="reply-button">Responder <i class="fa fa-reply" aria-hidden="true"></i></a></span>' +
             '</div>' +
         '</div>'
     );

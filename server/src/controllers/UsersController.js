@@ -37,22 +37,32 @@ class UsersController {
     async create (request, response) {
         try {
             const body = request.body;
+
             let user = await User.findOne({ username: body.username });
-
             if (user) {
-                response.status(409).json({ message: 'Username already exists' });
-            } else {
-                if (request.file) {
-                    const img = fs.readFileSync(request.file.path).toString('base64');
-                    body.image = Buffer.from(img, 'base64');
-                    body.imagetype = request.file.mimetype;
-                }
-                body.password = bcrypt.hashSync(body.password, 10);
-                user = new User(body);
-                await user.save();
-
-                response.status(200).json({ message: 'OK' });
+                return response.status(409).json({ message: 'Usuário já cadastrado.' });
             }
+
+            user = await User.findOne({ email: body.email });
+            if (user) {
+                return response.status(409).json({ message: 'Email já cadastrado.' });
+            }
+
+            user = await User.findOne({ registry: body.registry });
+            if (user) {
+                return response.status(409).json({ message: 'Matrícula já cadastrada.' });
+            }
+
+            if (request.file) {
+                const img = fs.readFileSync(request.file.path).toString('base64');
+                body.image = Buffer.from(img, 'base64');
+                body.imagetype = request.file.mimetype;
+            }
+            body.password = bcrypt.hashSync(body.password, 10);
+            user = new User(body);
+            await user.save();
+
+            response.status(200).json({ message: 'OK' });
         } catch (error) {
             response.status(500).json({ message: error.message });
         }

@@ -114,6 +114,7 @@ async function modifyUser(status, anchor=null) {
     };
 
     const response = await fetch('/users', options);
+    hideModal();
     if (response.status === 200) {
         const message = status === 'active' ? 'Usuário ativo.' : status === 'suspended' ? 'Usuário suspenso.' : 'Usuário banido.';
         showResponseModal(message);
