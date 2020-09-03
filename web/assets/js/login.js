@@ -48,8 +48,6 @@ function handleLogin() {
                 localStorage.setItem('status', responseJSON.status);
                 location.href = '/web/public/index.html';
             } else if (response.status === 401) {
-                document.getElementById('logout-item').dispatchEvent(new Event('click'));
-            } else if (response.status === 401) {
                 showWarningMessage('div-password', 'Usuário ou senha inválidos.', false);
             } else if (response.status === 403) {
                 showWarningMessage('div-password', 'Você não tem permissão para fazer login porque você esstá banido do fórum.', false);
