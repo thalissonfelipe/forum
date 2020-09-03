@@ -81,7 +81,7 @@ class PostsController {
     async deletePost (request, response) {
         try {
             await Post.findByIdAndDelete(request.params.id);
-            await User.findByIdAndUpdate(request.userid, { $inc: { posts: -1 } });
+            await User.findByIdAndUpdate(request.body.id, { $inc: { posts: -1 } });
             const deletedCount = (await Comment.deleteMany({ postId: request.params.id })).deletedCount;
 
             const categories = await Category.find({});

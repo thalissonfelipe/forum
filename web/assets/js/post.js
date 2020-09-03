@@ -73,7 +73,7 @@ function fillPost({ post, comments }) {
             '<div class="user-info">' +
                 '<a class="' + iconClass + '" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
                 '<img class="icon" src="' + getAvatarSrc(post.user.profile, post.user.userImage, post.user.userImageType) + '" />' +
-                '<span id="userid" data-id=">' + post.user.id + '">' + author + '</span>' +
+                '<span id="userid" data-id="' + post.user.id + '">' + author + '</span>' +
                 spanPosts +
                 '<p class="joined">Entrou: <span>' + formatDatetime(post.user.createdAt) + '</span></p>' +
             '</div>' +
@@ -166,12 +166,14 @@ function addComment() {
 
 async function deleteItem(type, anchor=null) {
     const url = anchor !== null ? `/${type}/${anchor.getAttribute('commentId')}` : `/${type}/${getQueryParameter('id')}`;
+    const id = anchor !== null ? anchor.getAttribute('id') : document.getElementById('userid').getAttribute('data-id');
     const options = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-        }
+        },
+        body: JSON.stringify({ id })
     };
 
     const response = await fetch(url, options);
@@ -204,7 +206,7 @@ async function checkUser(postId, commentsIds) {
     }
 
     if (commentsIds.includes(_id)) {
-        document.getElementById(_id).parentElement.classList.add('can-update');
+        document.getElementById(_id).classList.add('can-update');
     }
 
 }
