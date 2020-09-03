@@ -176,12 +176,12 @@ input:focus::placeholder {
 }
 
 .input-container input[type="file"]{
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 .input-container input[type="file"] + label {
@@ -191,7 +191,7 @@ input:focus::placeholder {
     background-color: var(--primary);
     display: inline-block;
     margin-left: 31px;
-    padding: 10px;
+    padding: 0.5rem 1rem;
     border-radius: 0.8rem;
 }
 

@@ -283,11 +283,21 @@ input:checked + .slider:before {
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
-    background-color: #FFCCEC;
+    background-color: var(--primary);
+    fill: var(--primary);
+    color: var(--primary);
     margin: 0 2rem 0 1rem;
     flex-shrink: 0;
     flex-grow: 0;
     outline: none;
+}
+
+.category-icon {
+    width: 5rem;
+    height: 5rem;
+}
+
+.category-icon path {
 }
 
 .grid .row .left-side .info {

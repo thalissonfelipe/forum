@@ -57,7 +57,7 @@ function fillCategory(category) {
         container.insertAdjacentHTML('beforeend',
             '<div class="row">' +
                 '<div class="left-side">' +
-                    '<img class="icon" src="' + getAvatarSrc(post.userImage, post.userImageType) + '" />' +
+                    '<img class="icon" src="' + getAvatarSrc(post.profile, post.userImage, post.userImageType) + '" />' +
                     '<a href="/web/public/post.html?category=' + category.title + '&id=' + post.id  + '" class="title">' + post.title + '</a>' +
                 '</div>' +
                 '<div class="right-side">' +

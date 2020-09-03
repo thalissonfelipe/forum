@@ -72,7 +72,7 @@ function fillPost({ post, comments }) {
             '</div>' +
             '<div class="user-info">' +
                 '<a class="' + iconClass + '" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
-                '<img class="icon" src="' + getAvatarSrc(post.user.userImage, post.user.userImageType) + '" />' +
+                '<img class="icon" src="' + getAvatarSrc(post.user.profile, post.user.userImage, post.user.userImageType) + '" />' +
                 '<span id="userid" data-id=">' + post.user.id + '">' + author + '</span>' +
                 spanPosts +
                 '<p class="joined">Entrou: <span>' + formatDatetime(post.user.createdAt) + '</span></p>' +
@@ -100,7 +100,7 @@ function fillPost({ post, comments }) {
                 '</div>' +
                 '<div class="user-info">' +
                     '<a class="' + iconClass + '" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="deleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
-                    '<img class="icon" src="' + getAvatarSrc(comment.user.userImage, comment.user.userImageType) + '" />' +
+                    '<img class="icon" src="' + getAvatarSrc(comment.user.profile, comment.user.userImage, comment.user.userImageType) + '" />' +
                     '<span>' + author + '</span>' +
                     spanPosts +
                     '<p class="joined">Entrou: <span>' + formatDatetime(comment.user.createdAt) + '</span></p>' +
@@ -200,7 +200,7 @@ async function checkUser(postId, commentsIds) {
     const { _id } = await response.json();
 
     if (_id === postId) {
-        document.getElementById('buttons-post').classList.add('can-update');
+        document.getElementById('delete-post').classList.add('can-update');
     }
 
     if (commentsIds.includes(_id)) {

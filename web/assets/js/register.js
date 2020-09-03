@@ -1,6 +1,13 @@
 window.addEventListener('load', function() {
     handleRegister();
+    handleImage();
 });
+
+function handleImage() {
+     document.querySelector('input#photo').addEventListener('change', (event) => {
+        document.getElementById('photo-label').innerHTML = event.target.files[0].name;
+     });
+}
 
 function handleRegister() {
     document.querySelector('#register-button').addEventListener('click', async (event) => {
@@ -37,10 +44,13 @@ function handleRegister() {
             showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone.', true);
             errors++;
         } if (course  === '' || !(/^[a-zA-Z" "ç]{3,40}/.test(course)) ) {
-            showWarningMessage('div-input-group-1', 'Curso inválido.', true, true);
+            showWarningMessage('div-input-group-1', 'Curso inválido.', true);
             errors++;
         } if (semester === '' || !(/[0-9]/.test(semester)) || ( semester > 20 || semester < 1  ) ) {
             showWarningMessage('div-input-group-2', 'Semestre inválido.', true);
+            errors++;
+        } if (file && file.size > 30000) { // 30KB
+            showWarningMessage('div-photo', 'Selecione uma foto até 30KB.', true);
             errors++;
         } else if (errors == 0) {
             const body = { name, username, password, email, registry, phone, course, semester };

@@ -69,10 +69,10 @@ function handleUpdateInfo() {
             showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone', true);
             errors++;
         } if (course  === '' || !(/^[a-zA-Z" "ç]{3,40}/.test(course)) ) {
-            showWarningMessage('div-course', 'Curso inválido.', true, true);
+            showWarningMessage('div-course', 'Curso inválido.', true);
             errors++;
         } if (semester === '' || !(/[0-9]/.test(semester)) || ( semester > 20 || semester < 1  ) ) {
-            showWarningMessage('div-semester', 'Semestre inválido.', true,true);
+            showWarningMessage('div-semester', 'Semestre inválido.', true);
             errors++;
         }
         else if (errors === 0){

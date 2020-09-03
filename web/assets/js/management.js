@@ -37,7 +37,7 @@ function fillUsers(users) {
             container.insertAdjacentHTML('beforeend',
                 '<div class="row">' +
                     '<div class="left-side">' +
-                        '<img class="icon" src="' + getAvatarSrc(user.image, user.imagetype) + '" />' +
+                        '<img class="icon" src="' + getAvatarSrc(user.profile, user.image, user.imagetype) + '" />' +
                         '<div class="info">' +
                             '<a href="#" class="title" registry="' + user.registry + '" onclick="getUser(this)">' + user.name + '</a>' +
                             '<p class="description">' + user.course + '</p>' +

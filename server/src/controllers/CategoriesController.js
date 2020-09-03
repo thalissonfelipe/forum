@@ -25,7 +25,7 @@ class CategoriesController {
                 body.push({
                     title: categories[i].title,
                     description: categories[i].description,
-                    topics: categories[i].topics,
+                    topics: [...categories[i].topics, lastPostId],
                     comments: categories[i].comments,
                     lastPost
                 });

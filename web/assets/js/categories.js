@@ -36,7 +36,7 @@ function fillCategories(categories) {
         container.insertAdjacentHTML('beforeend',
             '<div class="row categories">' +
                 '<div class="left-side">' +
-                    '<img class="icon" src="' + getAvatarSrc(category.image, category.imagetype) + '" />' +
+                    '<img class="icon" src="/web/assets/img/default-category.png" />' +
                     '<div class="info">' +
                         '<a href="/web/public/category.html?category=' + category.title + '" class="title">' + category.title + '</a>' +
                         '<p class="description">' + category.description + '</p>' +

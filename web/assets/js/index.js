@@ -99,7 +99,7 @@ function fillHome({ categories, posts }) {
         container.insertAdjacentHTML('beforeend',
             '<div class="row categories">' +
                 '<div class="left-side">' +
-                '<img class="icon" src="' + getAvatarSrc(category.image, category.imagetype) + '" />' +
+                '<img class="icon" src="/web/assets/img/default-category.png" />' +
                     '<div class="info">' +
                         '<a href="/web/public/category.html?category=' + category.title + '" class="title">' + category.title + '</a>' +
                         '<p class="description">' + category.description + '</p>' +
@@ -140,7 +140,7 @@ function fillHome({ categories, posts }) {
         container.insertAdjacentHTML('beforeend',
             '<div class="row">' +
                 '<div class="left-side">' +
-                    '<img class="icon" src="' + getAvatarSrc(post.userImage, post.userImageType) + '" />' +
+                    '<img class="icon" src="' + getAvatarSrc(post.profile, post.userImage, post.userImageType) + '" />' +
                     '<a href="/web/public/post.html?category=' + post.category + '&id=' + post._id  + '" class="title">' + post.title + '</a>' +
                 '</div>' +
                 '<div class="right-side">' +

@@ -207,12 +207,14 @@ function normalizeFontSize() {
     root.style.setProperty('--font-size', 1);
 }
 
-function getAvatarSrc(buffer, bufferType) {
-    let src = '/web/assets/img/default-avatar.png';
+function getAvatarSrc(profile, buffer, bufferType) {
+    let src;
 
     if (buffer) {
         let b64encoded = btoa(String.fromCharCode.apply(null, buffer.data));
         src = `data:${bufferType};base64,${b64encoded}`;
+    } else {
+        src = profile === 'admin' ? '/web/assets/img/default-avatar-admin.png' : '/web/assets/img/default-avatar.png';
     }
 
     return src;
