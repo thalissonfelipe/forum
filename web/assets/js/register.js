@@ -18,7 +18,7 @@ function handleRegister() {
         const course = document.querySelector('input#course').value;
         const semester = document.querySelector('input#semester').value;
 
-        if (name === '' || !(/^[A-Z a-z]{3,50}$/.test(name)) ) {  //name !== /^[A-Z a-z]{3,50}$/
+        if (name === '' || !(/^[a-zA-Z" "ç]{3,40}/.test(name)) ) {  //name !== /^[A-Z a-z]{3,50}$/
             showWarningMessage('div-name', 'Nome inválido.', true);
             errors++;
         } if (username === '' || !(/^[a-z0-9_-]{3,20}$/.test(username)) ) {
@@ -36,7 +36,7 @@ function handleRegister() {
         } if (phone === '' || !(/[0-9]{11}/.test(phone)) ) {
             showWarningMessage('div-phone', 'Telefone inválido. Insira 2 dígitos de ddd + 9 dígitos do telefone.', true);
             errors++;
-        } if (course  === '' || !(/^[A-Za-z]{3,30}$/.test(course)) ) {
+        } if (course  === '' || !(/^[a-zA-Z" "ç]{3,40}/.test(course)) ) {
             showWarningMessage('div-input-group-1', 'Curso inválido.', true, true);
             errors++;
         } if (semester === '' || !(/[0-9]/.test(semester)) || ( semester > 20 || semester < 1  ) ) {
