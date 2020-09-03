@@ -9,7 +9,7 @@ class CategoriesController {
             const body = [];
 
             for (let i = 0; i < categories.length; i++) {
-                const lastPostId = categories[i].topics.pop();
+                const lastPostId = categories[i].topics[categories[i].topics.length - 1];
                 let lastPost = null;
                 if (lastPostId) {
                     const { title, userId, createdAt, _id } = await Post.findById(lastPostId);
@@ -25,7 +25,7 @@ class CategoriesController {
                 body.push({
                     title: categories[i].title,
                     description: categories[i].description,
-                    topics: [...categories[i].topics, lastPostId],
+                    topics: categories[i].topics,
                     comments: categories[i].comments,
                     lastPost
                 });
