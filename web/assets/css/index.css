@@ -196,10 +196,6 @@ input:checked + .slider:before {
     margin: 1rem;
 }
 
-.grid-mgm{
-    /* min-height: 75rem; */
-}
-
 .grid.main-categories {
     grid-row: 1/2;
     grid-column: 1/2;
@@ -297,8 +293,6 @@ input:checked + .slider:before {
     height: 5rem;
 }
 
-.category-icon path {
-}
 
 .grid .row .left-side .info {
     display: flex;
@@ -498,6 +492,22 @@ input:checked + .slider:before {
     font-size: calc(2rem * var(--font-size));
     padding-right: 1rem;
 }
+
+.trending .new-topic-container-disabled {
+    background-color: var(--text);
+    width: 15rem;
+    height: 5rem;
+    border-radius: 4rem;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0rem 0.3rem 0.3rem 0.15rem rgba(22, 21, 22, 0.2);
+    color: var(--white);
+    font-size: calc(1.5rem * var(--font-size));
+    font-weight: bold;
+}
+
 
 /*TRENDING SECTION FIM*/
 

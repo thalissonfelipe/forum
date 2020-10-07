@@ -67,6 +67,7 @@ function replyPost() {
 function handleTopicButton() {
     if (localStorage.getItem('status') !== 'active') {
         document.querySelector('#cursor-disabled').style.cursor = 'not-allowed';
+        document.querySelector('.new-topic-container').classList.add('new-topic-container-disabled');
         document.querySelector('.new-topic-container').style.pointerEvents = 'none';
     }
 
@@ -238,4 +239,17 @@ function showResponseModal(message) {
 
 function hideResponseModal() {
     document.getElementById('response-modal').style.display = 'none';
+}
+
+function showConfirmModal(message) {
+    document.getElementById('confirm-modal').style.display = 'flex';
+    document.getElementById('confirm-modal-message').innerHTML = message;
+
+    setTimeout(function() {
+        document.getElementById('response-modal').style.display = 'none';
+    }, 3000);
+}
+
+function hideConfirmModal() {
+    document.getElementById('confirm-modal').style.display = 'none';
 }

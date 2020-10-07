@@ -187,7 +187,7 @@ function fillHome({ categories, posts }) {
     container.insertAdjacentHTML('beforeend',
         '</div>' +
         '<span id="cursor-disabled">'+
-            '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container">' +
+            '<a id="reply-top" href="#new-post" onclick="addNewPost()" class="new-topic-container" data-title="Faça login para criar postagens">' +
                 '<i class="fa fa-plus" aria-hidden="true"></i>' +
                 'TÓPICO' +
             '</a>'+
