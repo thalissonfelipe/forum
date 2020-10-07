@@ -463,6 +463,47 @@ input:checked + .slider:before {
     top: 70rem;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+}
+
+.tooltip-on {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-on .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    height: 0%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    opacity: 0;
+    font-size: 1.4rem;
+    margin-top: 1.8rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border-radius: 0.8rem;
+    box-shadow: 0rem 0.0rem 0.0rem 0.0rem rgba(29, 29, 29, 0.2);
+    transition: 0.2s ease-in-out;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip-on:hover .tooltiptext {
+    visibility: visible;
+    transition: 0.2s ease-in-out;
+    height: 100%;
+    opacity: 0.8;
+    box-shadow: 0rem 0.2rem 0.2rem 0.1rem rgba(29, 29, 29, 0.2);
+}
+
 .trending .new-topic-container {
     background-color: var(--secondary);
     width: 15rem;
@@ -494,6 +535,7 @@ input:checked + .slider:before {
 }
 
 .trending .new-topic-container-disabled {
+    position: relative;
     background-color: var(--text);
     width: 15rem;
     height: 5rem;
@@ -506,6 +548,31 @@ input:checked + .slider:before {
     color: var(--white);
     font-size: calc(1.5rem * var(--font-size));
     font-weight: bold;
+}
+
+.trending .new-topic-container-disabled:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.trending .new-topic-container-disabled:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
 }
 
 

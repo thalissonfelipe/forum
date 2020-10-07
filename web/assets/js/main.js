@@ -67,6 +67,7 @@ function replyPost() {
 function handleTopicButton() {
     if (localStorage.getItem('status') !== 'active') {
         document.querySelector('#cursor-disabled').style.cursor = 'not-allowed';
+        document.querySelector('.tooltip').classList.add('tooltip-on');
         document.querySelector('.new-topic-container').classList.add('new-topic-container-disabled');
         document.querySelector('.new-topic-container').style.pointerEvents = 'none';
     }
