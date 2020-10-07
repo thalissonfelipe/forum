@@ -451,6 +451,43 @@ input:focus::placeholder {
     opacity: 0.8;
 }
 
+#gap{
+    content: "";
+    margin: 0.2rem;
+    display: block;
+    font-size: 24%;
+}
+
+.status-text-active {
+    padding: 0.2rem 1.4rem 0.2rem 1.4rem;
+    border-radius: 0.8rem;
+    background-color: #00E01A;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0rem 0.1rem 0.15rem 0.05rem rgba(49, 49, 58, 0.185);
+}
+
+.status-text-suspended {
+    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    border-radius: 0.8rem;
+    background-color: #FF9114;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0rem 0.1rem 0.15rem 0.05rem rgba(49, 49, 58, 0.185);
+}
+
+.status-text-banned {
+    padding: 0.2rem 1.2rem 0.2rem 1.2rem;
+    border-radius: 0.8rem;
+    background-color: #FF425B;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0rem 0.1rem 0.15rem 0.05rem rgba(49, 49, 58, 0.185);
+}
+
 .loader {
     border: 1.6rem solid var(--main); 
     border-top: 1.6rem solid var(--secondary);

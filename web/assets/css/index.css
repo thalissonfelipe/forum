@@ -498,6 +498,7 @@ input:checked + .slider:before {
     font-size: calc(2rem * var(--font-size));
     padding-right: 1rem;
 }
+
 /*TRENDING SECTION FIM*/
 
 /*PÁGINA CATEGORIAS*/

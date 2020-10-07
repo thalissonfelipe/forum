@@ -32,6 +32,12 @@ function fillUsers(users) {
     const container = document.querySelector('.grid.main-categories');
     document.querySelector('.loader').style.display = 'none';
 
+    const status = {
+        'active': 'ATIVO',
+        'suspended': 'SUSPENSO',
+        'banned': 'BANIDO'
+    };
+
     users.map(user => {
         if (user.profile === 'common') {
             container.insertAdjacentHTML('beforeend',
@@ -39,8 +45,9 @@ function fillUsers(users) {
                     '<div class="left-side">' +
                         '<img class="icon" src="' + getAvatarSrc(user.profile, user.image, user.imagetype) + '" />' +
                         '<div class="info">' +
-                            '<a href="#" class="title" registry="' + user.registry + '" onclick="getUser(this)">' + user.name + '</a>' +
-                            '<p class="description">' + user.course + '</p>' +
+                            '<a href="#" class="title" registry="' + user.registry + '" onclick="getUser(this)">' + user.name + '</a>' + 
+                            '<p class="description">' + user.course + '</p><br id="gap">' +
+                            '<p><span id="status-text" class="status-text-'+ user.status +'">' + status[user.status] + '</span></p>' +
                         '</div>' +
                     '</div>' +
                     '<div class="right-side">' +
@@ -90,6 +97,7 @@ function showModal(user) {
     document.getElementById('header-name').setAttribute('data-id', user._id);
     document.getElementById('status').innerHTML = status[user.status];
     document.getElementById('status').classList.add('user-' + Object.keys(status).find(k=>status[k]===status[user.status]));
+    document.getElementById('status-text').classList.add('status-text-' + Object.keys(status).find(k=>status[k]===status[user.status]));
     document.getElementById('username').innerHTML = user.username;
     document.getElementById('email').innerHTML = user.email;
     document.getElementById('createdAt').innerHTML = formatDatetime(user.created_at);
