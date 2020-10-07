@@ -381,6 +381,81 @@ input:focus::placeholder {
     font-size: 2rem;
 }
 
+#confirm-modal-message {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+#confirm-modal-title {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+#confirm-modal-button-ok {
+    padding: 1rem 4rem;
+    width: 100%;
+    height: 4rem;
+    border: none;
+    border-radius: 0 0 0rem 0.8rem;
+    cursor: pointer;
+    background: var(--secondary);
+    color: var(--white);
+    font-size: 1.5rem;
+    outline: none;
+    transition: 0.2s ease-in-out;
+}
+
+#confirm-modal-button-ok:hover {
+    opacity: 0.8;
+    font-size: 1.8rem;
+    transition: 0.2s ease-in-out;
+}
+
+#confirm-modal-button-cancel {
+    padding: 1rem 4rem;
+    width: 100%;
+    height: 4rem;
+    border: none;
+    border-radius: 0 0 0.8rem 0rem;
+    cursor: pointer;
+    background: var(--secondary);
+    color: var(--white);
+    font-size: 1.5rem;
+    outline: none;
+    transition: 0.2s ease-in-out;
+}
+
+#confirm-modal-button-cancel:hover {
+    opacity: 0.8;
+    font-size: 1.8rem;
+    transition: 0.2s ease-in-out;
+}
+
+.modal-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.confirm-modal {
+    background-color: var(--primary);
+    color: var(--main);
+    width: 30rem;
+    height: 15rem;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    padding-top: 2.5rem;
+    transform: translateX(-50%);
+    border-radius: 0.8rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
 .user-active {
     padding: 1rem 2rem 1rem 2rem;
     margin: 1rem;

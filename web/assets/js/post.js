@@ -98,8 +98,8 @@ function fillPost({ post, comments }) {
                     '<span>' + formatDatetime(comment.createdAt) + '</span>' +
                     '<p>' + comment.body +'</p>' +
                 '</div>' +
-                '<div class="user-info">' +
-                    '<a class="' + iconClass + '" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="deleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
+                '<div class="user-info">' + 
+                    '<a class="' + iconClass + '" commentId="' + comment.id + '" id="' + comment.user.id + '" onclick="modaldeleteItem(\'comments\', this)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
                     '<img class="icon" src="' + getAvatarSrc(comment.user.profile, comment.user.userImage, comment.user.userImageType) + '" />' +
                     '<span>' + author + '</span>' +
                     spanPosts +
@@ -164,7 +164,17 @@ function addComment() {
     });
 }
 
+function modaldeleteItem(type, anchor=null) {
+    t = type;
+    a = anchor;
+    document.getElementById('confirm-modal').style.display = 'flex';
+    document.getElementById('confirm-modal-message').innerHTML = 'Tem certeza?';
+    
+    document.getElementById('confirm-modal-button-ok').setAttribute('onclick','deleteItem(t, a)');
+}
+
 async function deleteItem(type, anchor=null) {
+    document.getElementById('confirm-modal').style.display = 'none';
     const url = anchor !== null ? `/${type}/${anchor.getAttribute('commentId')}` : `/${type}/${getQueryParameter('id')}`;
     const id = anchor !== null ? anchor.getAttribute('id') : document.getElementById('userid').getAttribute('data-id');
     const options = {

@@ -247,8 +247,9 @@ function showConfirmModal(message) {
     document.getElementById('confirm-modal-message').innerHTML = message;
 
     setTimeout(function() {
-        document.getElementById('response-modal').style.display = 'none';
+        document.getElementById('confirm-modal').style.display = 'none';
     }, 3000);
+
 }
 
 function hideConfirmModal() {

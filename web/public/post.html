@@ -45,8 +45,18 @@
         <section class="main-content grid-mgm" id="cardscrollbar">
             <div class="loader"></div>
         </section>
+        <section id="delete-modal">
+            <div id="confirm-modal" class="confirm-modal">
+                <span id="confirm-modal-title">Deletar</span>
+                <span id="confirm-modal-message"></span>
+                <div class="modal-buttons">
+                    <button id="confirm-modal-button-ok">Sim</button>
+                    <button onclick="document.getElementById('confirm-modal').style.display = 'none';" id="confirm-modal-button-cancel">Cancelar</button>
+                </div>
+            </div>
+        </section>
     </div>
-    <script src="/web/assets/js/main.js"></script>
     <script src="/web/assets/js/post.js"></script>
+    <script src="/web/assets/js/main.js"></script>
 </body>
 </html>
