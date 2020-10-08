@@ -71,7 +71,7 @@ function fillPost({ post, comments }) {
                 '<p>' + post.body +'</p>' +
             '</div>' +
             '<div class="user-info">' +
-                '<a class="' + iconClass + '" id="delete-post" onclick="deleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
+                '<a class="' + iconClass + '" id="delete-post" onclick="modaldeleteItem(\'posts\')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>' +
                 '<img class="icon" src="' + getAvatarSrc(post.user.profile, post.user.userImage, post.user.userImageType) + '" />' +
                 '<span id="userid" data-id="' + post.user.id + '">' + author + '</span>' +
                 spanPosts +
